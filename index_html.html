@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTC · Guía Docente 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:#5ECECA; --teal-d:#3dafaf; --teal-l:#edfafa;
+  --orange:#F4A261; --orange-d:#d9813e; --orange-l:#fff3ea;
+  --purple:#7B6BAE; --purple-d:#5f5191; --purple-l:#f1effe;
+  --blue:#4A7FE0; --blue-d:#2f63c4; --blue-l:#eef4ff;
+  --g:#1a7c4f; --gd:#145f3c; --gl:#e6f4ed; --gll:#f0faf5;
+  --text:#0d1f17; --text2:#3d5a4c; --text3:#8aab99;
+  --border:#dce8e2; --bg:#f2f7f4; --white:#ffffff;
+  --red:#c0392b; --redl:#fdf2f1;
+  --amber:#b45309; --amberl:#fffbeb;
+  --font:'Sora',sans-serif; --mono:'JetBrains Mono',monospace;
+  --r:12px;
+  --sh:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+  --sh-lg:0 4px 6px rgba(0,0,0,.05),0 10px 40px rgba(0,0,0,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{position:sticky;top:0;z-index:500;background:var(--g);display:flex;align-items:stretch;box-shadow:0 2px 20px rgba(0,0,0,.22)}
+.brand{display:flex;align-items:center;gap:10px;padding:0 20px;border-right:1px solid rgba(255,255,255,.12);flex-shrink:0}
+.brand-mark{width:28px;height:28px;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.brand-mark svg{width:16px;height:16px}
+.brand-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.nav-tabs{display:flex;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.ntab{display:flex;align-items:center;gap:7px;background:none;border:none;border-bottom:3px solid transparent;padding:0 18px;height:52px;font-family:var(--font);font-size:13px;font-weight:600;color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;transition:all .18s}
+.ntab:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.06)}
+.ntab.on{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.07)}
+.ntab-icon{font-size:15px}
+
+/* ── LAYOUT ── */
+.page{display:none}
+.page.on{display:flex;min-height:calc(100vh - 52px)}
+.page-full{display:none}
+.page-full.on{display:block}
+
+.sidebar{width:216px;flex-shrink:0;background:var(--white);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);padding:0 16px 6px;margin-top:18px}
+.sl:first-child{margin-top:0}
+.si{display:block;width:100%;background:none;border:none;border-left:3px solid transparent;padding:8px 16px;text-align:left;font-family:var(--font);font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .14s}
+.si:hover{background:var(--gll);color:var(--text)}
+.si.on{background:var(--gl);color:var(--g);font-weight:700;border-left-color:var(--g)}
+
+.content{flex:1;padding:36px 40px 100px;max-width:1120px;width:100%}
+.sec{display:none}
+.sec.on{display:block}
+
+/* ── TYPE ── */
+.page-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;line-height:1.2}
+.page-desc{font-size:14px;color:var(--text3);margin-bottom:28px}
+.h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px;margin-top:24px}
+.prose{font-size:14px;line-height:1.75;color:var(--text2)}
+.prose p{margin-bottom:12px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--text);font-weight:700}
+hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
+
+/* ── CALLOUTS ── */
+.callout{border-left:4px solid var(--g);background:var(--gll);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:14px;line-height:1.65;color:var(--text2);margin:14px 0}
+.callout.warn{border-left-color:var(--amber);background:var(--amberl)}
+.callout.danger{border-left-color:var(--red);background:var(--redl)}
+.callout.info{border-left-color:var(--blue);background:var(--blue-l)}
+.callout strong{display:block;margin-bottom:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--g)}
+.callout.warn strong{color:var(--amber)}
+.callout.danger strong{color:var(--red)}
+.callout.info strong{color:var(--blue)}
+
+/* ── HERO BOX ── */
+.hero-box{background:linear-gradient(135deg,var(--g) 0%,var(--gd) 100%);border-radius:var(--r);padding:22px 26px;color:rgba(255,255,255,.9);position:relative;overflow:hidden;margin-bottom:20px}
+.hero-box::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;background:rgba(255,255,255,.06);border-radius:50%}
+.hero-box .hb-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:7px}
+.hero-box .hb-body{font-size:14px;color:rgba(255,255,255,.85);line-height:1.65}
+
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:16px;align-items:flex-start;padding:0 0 20px}
+.step:last-child{padding-bottom:0}
+.step-left{display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0}
+.step-circle{width:32px;height:32px;background:var(--g);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.step-circle.alt{background:var(--gl);color:var(--g)}
+.step-line{width:2px;background:var(--border);flex:1;min-height:16px;margin:4px 0}
+.step:last-child .step-line{display:none}
+.step-body{padding-top:5px;flex:1}
+.step-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.step-text{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ── GRIDS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.g-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}
+.g-card .gc-icon{font-size:22px;margin-bottom:8px;display:block}
+.g-card .gc-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.g-card .gc-body{font-size:12px;color:var(--text2);line-height:1.55}
+
+/* ── PILLS ── */
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{background:var(--white);border:2px solid var(--border);border-radius:30px;padding:7px 16px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s}
+.pill:hover{border-color:var(--g);color:var(--g)}
+.pill.on{border-color:var(--g);background:var(--g);color:#fff}
+
+/* ── STRUCTURE FLOW ── */
+.structure-flow{display:flex;gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin:18px 0}
+.sf-item{flex:1;background:var(--white);padding:16px 12px;text-align:center;position:relative}
+.sf-item::after{content:'→';position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);z-index:2;background:var(--border);padding:0 4px}
+.sf-item:last-child::after{display:none}
+.sf-icon{font-size:22px;margin-bottom:5px;display:block}
+.sf-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+.sf-sub{font-size:11px;color:var(--text3)}
+
+/* ── GRADE BLOCKS ── */
+.grade-block{margin-bottom:16px}
+.grade-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--white);border:1px solid var(--border);border-radius:var(--r) var(--r) 0 0;border-bottom:2px solid var(--g)}
+.grade-num{width:36px;height:36px;background:var(--g);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+.grade-title{font-size:15px;font-weight:700;color:var(--text)}
+.grade-project{font-size:12px;color:var(--text3);margin-top:2px}
+.grade-body{background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:14px 18px;font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ── BITÁCORA CARD ── */
+.bita-card{background:linear-gradient(135deg,#f0faf5 0%,#e6f4ed 100%);border:2px solid var(--g);border-radius:var(--r);padding:20px 22px;margin:16px 0}
+.bita-title{font-size:15px;font-weight:800;color:var(--g);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.bita-body{font-size:13px;color:var(--text2);line-height:1.65}
+.bita-body ul{margin:8px 0 0 16px}
+.bita-body li{margin-bottom:5px}
+
+/* ── SPECIAL ITEMS ── */
+.special-items{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.special-item{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.si-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.si-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.si-body{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* ── CAMPUS FLOW ── */
+.campus-flow{display:flex;flex-direction:column;gap:0;margin:16px 0}
+.campus-item{display:flex;gap:0;align-items:stretch}
+.campus-connector{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
+.campus-dot{width:14px;height:14px;border-radius:50%;background:var(--g);border:3px solid var(--white);box-shadow:0 0 0 2px var(--g);flex-shrink:0;margin-top:4px}
+.campus-line{width:2px;background:var(--gl);flex:1;min-height:12px;margin:4px 0}
+.campus-item:last-child .campus-line{display:none}
+.campus-body{padding:2px 0 20px 12px;flex:1}
+.campus-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.campus-desc{font-size:13px;color:var(--text2);line-height:1.55}
+.campus-sub{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.campus-sub-item{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;background:var(--bg);border-radius:7px;font-size:12px;color:var(--text2);line-height:1.5}
+.csi-icon{flex-shrink:0}
+.csi-content strong{display:block;font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px}
+
+/* ── SANDWICH VISUAL ── */
+.sandwich-wrap{margin:20px 0}
+.sandwich-layer{display:flex;align-items:center;gap:14px;padding:16px 20px;margin-bottom:4px;border-radius:10px;transition:transform .15s;cursor:default}
+.sandwich-layer:hover{transform:translateX(4px)}
+.sw-icon{font-size:26px;flex-shrink:0;width:36px;text-align:center}
+.sw-content{flex:1}
+.sw-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.sw-title{font-size:14px;font-weight:800;margin-bottom:3px}
+.sw-desc{font-size:13px;line-height:1.5;opacity:.85}
+.sw-bread-t{background:var(--g);color:#fff}
+.sw-meat{background:var(--orange);color:#fff}
+.sw-veggie{background:var(--teal);color:#fff}
+.sw-sauce{background:var(--purple);color:#fff}
+.sw-bread-b{background:var(--g);color:#fff}
+
+.sandwich-formula{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--white);border:2px dashed var(--border);border-radius:var(--r);padding:14px 18px;margin-top:16px;font-size:13px;color:var(--text2)}
+.sf-chip{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+.sf-plus,.sf-eq{font-size:15px;color:var(--text3);font-weight:700}
+
+/* ── DEMO DAY MOMENTOS ── */
+.momento-flow{display:flex;flex-direction:column;gap:0;margin:20px 0}
+.momento{display:flex;gap:0;align-items:stretch}
+.momento-connector{display:flex;flex-direction:column;align-items:center;width:44px;flex-shrink:0}
+.momento-num{width:38px;height:38px;background:var(--g);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;border:3px solid var(--white);box-shadow:0 0 0 2px var(--g)}
+.momento-num.post{background:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+.momento-vline{width:2px;background:var(--border);flex:1;min-height:16px;margin:6px 0}
+.momento:last-child .momento-vline{display:none}
+.momento-body{padding:0 0 24px 14px;flex:1}
+.momento-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:4px}
+.momento-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.momento-text{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ── EXPAND CARDS ── */
+.expand-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:8px}
+.expand-hdr{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:12px}
+.expand-hdr:hover{background:var(--gll)}
+.expand-hdr-left{display:flex;align-items:center;gap:10px}
+.expand-ico{font-size:18px;flex-shrink:0}
+.expand-title{font-size:14px;font-weight:700;color:var(--text)}
+.expand-arr{font-size:11px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.expand-card.open .expand-arr{transform:rotate(180deg)}
+.expand-body{display:none;padding:14px 18px 16px;border-top:1px solid var(--border);font-size:13px;color:var(--text2);line-height:1.65}
+.expand-card.open .expand-body{display:block}
+.expand-body p{margin-bottom:8px}
+.expand-body p:last-child{margin-bottom:0}
+
+/* ── RUBRICS ── */
+.levels-visual{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.lv{border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+.lv-head{padding:10px 12px;font-size:12px;font-weight:700}
+.lv-body{padding:10px 12px;font-size:12px;color:var(--text2);line-height:1.5;background:var(--white)}
+.lv-body li{list-style:none;padding:2px 0}
+.lv-body li::before{content:'·  ';color:var(--text3)}
+.lv-i .lv-head{background:var(--redl);color:var(--red)}
+.lv-p .lv-head{background:var(--amberl);color:var(--amber)}
+.lv-l .lv-head{background:var(--gl);color:var(--g)}
+.lv-d .lv-head{background:var(--blue-l);color:var(--blue-d)}
+
+.sobre-box{background:var(--purple-l);border:1px solid #c4b5fd;border-radius:var(--r);padding:18px 20px;margin:12px 0}
+.sb-title{font-size:14px;font-weight:700;color:var(--purple);margin-bottom:6px}
+.sb-desc{font-size:13px;color:var(--text2);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:#fff;border:1px solid #c4b5fd;border-radius:20px;padding:3px 11px;font-size:12px;color:var(--purple)}
+
+.rg{display:none}
+.rg.on{display:block}
+.rub-chapter{margin-bottom:28px}
+.rub-ch-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--g);padding-bottom:8px;border-bottom:2px solid var(--gl);margin-bottom:14px}
+.rub-criteria{display:flex;flex-direction:column;gap:8px}
+.rub-criterion{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.rub-crit-header{background:var(--gll);padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.rub-crit-mission{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.rub-crit-text{padding:14px 16px;font-size:13px;color:var(--text2);line-height:1.65}
+.rub-crit-text em{display:block;margin-top:8px;font-style:italic;color:var(--text3);font-size:12px}
+
+/* ── FEEDBACK ── */
+.tech-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.tech-hdr{display:flex;align-items:center;gap:12px;padding:13px 18px;background:var(--gll);border-bottom:1px solid var(--border)}
+.tech-name{font-size:14px;font-weight:700;color:var(--text)}
+.tech-body{padding:16px 18px;font-size:13px;color:var(--text2);line-height:1.65}
+.tech-body p{margin-bottom:8px}
+.tech-example{background:var(--gll);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:11px 14px;font-style:italic;font-size:13px;color:var(--text2);line-height:1.6;margin-top:8px}
+
+/* ── AI BUILDER ── */
+.ai-builder{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.ai-hdr{background:linear-gradient(135deg,var(--g) 0%,#145f3c 100%);padding:20px 24px}
+.ai-hdr-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px}
+.ai-hdr-sub{font-size:13px;color:rgba(255,255,255,.75)}
+.ai-body{padding:24px}
+.form-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:8px;display:block}
+.sel-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:20px}
+.sel-grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:20px}
+.sel-opt{border:2px solid var(--border);border-radius:8px;background:var(--white);padding:10px 12px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s;text-align:center}
+.sel-opt:hover{border-color:var(--g);color:var(--g)}
+.sel-opt.on{border-color:var(--g);background:var(--gl);color:var(--g);font-weight:700}
+.crit-display{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--text2);line-height:1.6;min-height:44px;margin-bottom:20px}
+.crit-display em{color:var(--text3);font-style:italic}
+.fb-textarea{width:100%;min-height:100px;border:2px solid var(--border);border-radius:8px;padding:12px 14px;font-family:var(--font);font-size:14px;resize:vertical;outline:none;transition:border-color .18s;background:var(--white);color:var(--text);line-height:1.6}
+.fb-textarea:focus{border-color:var(--g)}
+.fb-textarea::placeholder{color:var(--text3)}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--g);color:#fff;border:none;border-radius:8px;padding:11px 24px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.cta-btn:hover{background:var(--gd);transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,124,79,.3)}
+.cta-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.spin-wrap{display:none;align-items:center;gap:10px;margin-top:12px;font-size:14px;color:var(--text3)}
+.spin-wrap.show{display:flex}
+.spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--g);border-radius:50%;animation:sp .6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ai-result{display:none;margin-top:16px}
+.ai-result.show{display:block;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.ai-result-inner{background:var(--gll);border:1px solid var(--border);border-left:4px solid var(--g);border-radius:0 8px 8px 0;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--text2)}
+
+/* ── SIMULATOR ── */
+.sim-wrap{max-width:1220px;margin:0 auto;padding:32px 28px 100px}
+.pb-wrap{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.pb-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.pb-fill{height:100%;background:var(--g);border-radius:3px;transition:width .4s ease}
+.pb-lbl{font-size:13px;color:var(--text3);font-family:var(--mono);white-space:nowrap}
+.score-pill{display:none;background:var(--g);color:#fff;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:700;font-family:var(--mono)}
+.score-pill.show{display:inline-block}
+
+.bita-preview{background:var(--white);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-lg);overflow:hidden;margin-bottom:12px}
+.bp-top{background:var(--gll);border-bottom:1px solid var(--border);padding:10px 18px;display:flex;align-items:center;justify-content:space-between}
+.bp-mission{font-size:12px;font-weight:700;color:var(--g)}
+.bp-grade{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.bp-body{padding:20px}
+.bp-qlabel{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:6px}
+.bp-question{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.bp-hint{font-size:12px;color:var(--text3);font-style:italic;margin-bottom:18px}
+
+.options{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .18s;background:var(--white)}
+.opt:hover{border-color:#94a3b8;background:var(--bg)}
+.opt.sel{border-color:#64748b;background:#f8fafc}
+.opt.correct{border-color:var(--g);background:var(--gl)}
+.opt.wrong{border-color:var(--red);background:var(--redl)}
+.opt-radio{width:18px;height:18px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.opt.sel .opt-radio,.opt.correct .opt-radio{border-color:var(--g)}
+.opt.wrong .opt-radio{border-color:var(--red)}
+.opt-dot{width:8px;height:8px;border-radius:50%;background:var(--g);display:none}
+.opt.sel .opt-dot,.opt.correct .opt-dot{display:block}
+.opt.wrong .opt-dot{display:block;background:var(--red)}
+.opt-text{font-size:13px;line-height:1.55;color:var(--text2);font-style:italic;flex:1}
+.opt-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px;white-space:nowrap;margin-left:auto;flex-shrink:0;margin-top:2px;opacity:0;transition:opacity .2s}
+.opt.correct .opt-tag,.opt.wrong .opt-tag{opacity:1}
+.options.revealed .opt .opt-tag{opacity:1}
+.opt.is-i .opt-tag{background:var(--redl);color:var(--red)}
+.opt.is-p .opt-tag{background:var(--amberl);color:var(--amber)}
+.opt.is-l .opt-tag{background:var(--gl);color:var(--g)}
+.opt.is-d .opt-tag{background:var(--blue-l);color:var(--blue-d)}
+.opt.correct .opt-tag{background:var(--g);color:#fff}
+.opt.wrong .opt-tag{background:var(--red);color:#fff}
+
+.lp-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:8px}
+.level-picker{display:flex;gap:7px;flex-wrap:wrap}
+.lp{padding:7px 16px;border:2px solid var(--border);border-radius:20px;background:var(--white);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;color:var(--text2)}
+.lp.p-i{border-color:var(--red);background:var(--redl);color:var(--red)}
+.lp.p-p{border-color:var(--amber);background:var(--amberl);color:var(--amber)}
+.lp.p-l{border-color:var(--g);background:var(--gl);color:var(--g)}
+.lp.p-d{border-color:var(--blue-d);background:var(--blue-l);color:var(--blue-d)}
+
+.check-cta{margin-top:14px;padding:10px 22px;background:var(--g);color:#fff;border:none;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+.check-cta:hover{background:var(--gd)}
+.check-cta:disabled{opacity:.35;cursor:not-allowed}
+
+.fb-reveal{display:none;margin-top:12px}
+.fb-reveal.show{display:block;animation:fadeUp .25s ease}
+.fr-ok{background:var(--gl);border:1px solid #a7d9bf;padding:14px 18px;border-radius:10px}
+.fr-no{background:var(--redl);border:1px solid #f5b0aa;padding:14px 18px;border-radius:10px}
+.fr-icon{font-size:16px;margin-bottom:4px}
+.fr-title{font-size:14px;font-weight:700;margin-bottom:5px}
+.fr-ok .fr-title{color:var(--g)}
+.fr-no .fr-title{color:var(--red)}
+.fr-text{font-size:13px;line-height:1.6;color:var(--text2)}
+
+.sim-nav{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.nav-b{padding:9px 20px;border:2px solid var(--border);border-radius:8px;background:var(--white);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text2)}
+.nav-b:hover:not(:disabled){border-color:var(--g);color:var(--g)}
+.nav-b:disabled{opacity:.3;cursor:not-allowed}
+.nav-b.prim{background:var(--g);border-color:var(--g);color:#fff}
+.nav-b.prim:hover:not(:disabled){background:var(--gd)}
+.sim-grade{display:none}
+.sim-grade.on{display:block}
+
+@media(max-width:700px){
+  .sidebar{display:none}
+  .content{padding:20px 16px 60px;max-width:none}
+  .grid-2,.levels-visual{grid-template-columns:1fr}
+  .structure-flow{flex-direction:column}
+  .sf-item::after{display:none}
+  .brand-name{display:none}
+  .sel-grid-3{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     TOPBAR
+════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1a7c4f" stroke-width="2.5" stroke-linecap="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    <span class="brand-name">CTC · Guía Docente 2026</span>
+  </div>
+  <nav class="nav-tabs">
+    <button class="ntab on"  onclick="showTab('curso',this)"><span class="ntab-icon">📚</span> El Curso</button>
+    <button class="ntab"     onclick="showTab('demoday',this)"><span class="ntab-icon">🚀</span> Demo Day</button>
+    <button class="ntab"     onclick="showTab('rubricas',this)"><span class="ntab-icon">📐</span> Rúbricas</button>
+    <button class="ntab"     onclick="showTab('practica',this)"><span class="ntab-icon">🎯</span> Práctica</button>
+    <button class="ntab"     onclick="showTab('feedback',this)"><span class="ntab-icon">💬</span> Feedback</button>
+  </nav>
+</header>
+
+<!-- ════════════════════════════════════════
+     TAB 1 · EL CURSO
+════════════════════════════════════════ -->
+<div id="tab-curso" class="page on">
+  <nav class="sidebar">
+    <div class="sl">El Curso</div>
+    <button class="si on" onclick="showSec('c','c-estructura',this)">Estructura del curso</button>
+    <button class="si"    onclick="showSec('c','c-grados',this)">Proyectos por grado</button>
+    <button class="si"    onclick="showSec('c','c-bitacora',this)">La bitácora</button>
+    <button class="si"    onclick="showSec('c','c-campus',this)">Campus CTC</button>
+    <button class="si"    onclick="showSec('c','c-especiales',this)">Retos y puntos de control</button>
+    <button class="si"    onclick="showSec('c','c-formula',this)">La fórmula del éxito</button>
+  </nav>
+  <div class="content">
+
+    <!-- ESTRUCTURA -->
+    <div id="c-estructura" class="sec on">
+      <div class="page-title">Cómo está organizado el curso</div>
+      <div class="page-desc">La lógica que rige todas tus clases, de mayor a menor nivel.</div>
+      <div class="structure-flow">
+        <div class="sf-item"><span class="sf-icon">🏫</span><div class="sf-name">Grado</div><div class="sf-sub">9, 10 u 11</div></div>
+        <div class="sf-item"><span class="sf-icon">📦</span><div class="sf-name">Capítulo</div><div class="sf-sub">4 por grado = módulos</div></div>
+        <div class="sf-item"><span class="sf-icon">🎯</span><div class="sf-name">Misión</div><div class="sf-sub">≈ una clase</div></div>
+        <div class="sf-item"><span class="sf-icon">⚡</span><div class="sf-name">Nivel</div><div class="sf-sub">actividades dentro de la misión</div></div>
+      </div>
+      <div class="callout">
+        <strong>Cómo leerlo en la práctica</strong>
+        "Capítulo 2, Misión 3, Nivel 4" = segundo módulo del año, tercera clase del módulo, cuarta actividad de esa clase. Es tu GPS dentro del curso.
+      </div>
+      <hr class="div">
+      <div class="h3">Genially y la bitácora trabajan juntas</div>
+      <div class="prose">
+        <p>Las clases se desarrollan a través de <strong>Genially</strong> — ahí viven las actividades, los conceptos y los retos de la clase. Dentro de cada Genially está marcado claramente cuándo una actividad <strong>va en la bitácora</strong>.</p>
+        <p>No todo va en la bitácora: hay misiones de comprensión de conceptos o práctica que no se registran. La regla es simple: si el Genially lo marca, el estudiante lo registra en la bitácora. Si no, lo hace y ya.</p>
+      </div>
+    </div>
+
+    <!-- GRADOS -->
+    <div id="c-grados" class="sec">
+      <div class="page-title">Proyectos finales por grado</div>
+      <div class="page-desc">Cada grado tiene un proyecto distinto que atraviesa todos los capítulos del año.</div>
+      <div class="grade-block">
+        <div class="grade-header"><div class="grade-num">9</div><div><div class="grade-title">App funcional</div><div class="grade-project">Aplicación que resuelve una problemática social local</div></div></div>
+        <div class="grade-body">Los estudiantes identifican un problema real del entorno, lo analizan, diseñan una app con herramientas no-code, la construyen con base de datos y pantallas funcionales, y luego la mejoran con diagnóstico de uso real.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-header"><div class="grade-num">10</div><div><div class="grade-title">Página web de emprendimiento</div><div class="grade-project">Web profesional para un negocio local real</div></div></div>
+        <div class="grade-body">Los estudiantes eligen un emprendimiento del entorno, investigan al cliente y la competencia, construyen una web con HTML/CSS funcional, y la optimizan con feedback real de usuarios.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-header"><div class="grade-num">11</div><div><div class="grade-title">Campaña de marketing digital</div><div class="grade-project">Dashboard de competencia + campaña para una empresa real o creada</div></div></div>
+        <div class="grade-body">Los estudiantes seleccionan o crean una idea de empresa, investigan la competencia con un dashboard de datos, definen su propuesta de valor diferenciada y crean una campaña de marketing digital completa basada en ese análisis.</div>
+      </div>
+    </div>
+
+    <!-- BITÁCORA -->
+    <div id="c-bitacora" class="sec">
+      <div class="page-title">La bitácora</div>
+      <div class="page-desc">La herramienta central del estudiante — y tu referencia de evaluación en cada clase.</div>
+      <div class="bita-card">
+        <div class="bita-title">📋 ¿Qué es la bitácora?</div>
+        <div class="bita-body">Es un <strong>Google Doc</strong> que vive en la base de datos de CTC (campus Moodle). Es el cuaderno de trabajo del estudiante donde registra todo lo obligatorio para la evaluación.</div>
+      </div>
+      <div class="callout danger">
+        <strong>⚠️ Regla crítica — no se puede ignorar</strong>
+        El estudiante <strong>debe acceder a la bitácora siempre desde el campus CTC</strong>, no copiando el link ni abriendo el doc directamente en Google Drive. Si abre otra copia del doc, esa versión no queda en la base de datos de CTC y no podrás evaluarla.
+      </div>
+      <hr class="div">
+      <div class="h3">Cómo se usa en cada clase</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">El estudiante entra al campus y abre su bitácora desde ahí</div>
+            <div class="step-text">Siempre desde el campus CTC — nunca directamente desde Google Drive. Así garantizas que trabaja en la versión correcta que puedes evaluar.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Solo registra lo que el Genially marca como "bitácora"</div>
+            <div class="step-text">No todas las actividades van en la bitácora. Solo las marcadas explícitamente en el Genially. Las misiones de comprensión o práctica se hacen sin registrar.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Tú revisas y comentas la bitácora en cada clase</div>
+            <div class="step-text">Tu herramienta base como docente es la bitácora. Revísala clase a clase — verifica que los links abran, que las secciones evaluables estén completas. Puedes <strong>dejar comentarios directamente en el Google Doc</strong> como feedback continuo.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle alt">📌</div></div>
+          <div class="step-body">
+            <div class="step-title">En el Demo Day: el estudiante presiona el botón "Enviar bitácora"</div>
+            <div class="step-text">En la tarea del capítulo dentro del campus hay un botón. El estudiante lo presiona — no escribe nada, no sube nada. Como la bitácora ya vive en la base de datos de CTC, en ese momento tú puedes evaluarla.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMPUS -->
+    <div id="c-campus" class="sec">
+      <div class="page-title">Campus CTC</div>
+      <div class="page-desc">Cómo está organizado el LMS Moodle — para que siempre sepas dónde estás.</div>
+      <div class="campus-flow">
+
+        <div class="campus-item">
+          <div class="campus-connector"><div class="campus-dot"></div><div class="campus-line"></div></div>
+          <div class="campus-body">
+            <div class="campus-name">🎉 Bienvenida y primeros pasos</div>
+            <div class="campus-desc">La sección de inicio del campus. Contiene todo lo que el estudiante necesita para arrancar el año.</div>
+            <div class="campus-sub">
+              <div class="campus-sub-item"><div class="csi-icon">🎬</div><div class="csi-content"><strong>Video animado del propósito del curso</strong>Proyéctalo cuando un estudiante pregunte "¿para qué sirve este curso?" — explica el propósito de forma atractiva.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">⚡</div><div class="csi-content"><strong>Activación</strong>Primer acercamiento al curso.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">🗺️</div><div class="csi-content"><strong>Conocemos la ruta del curso</strong>Mapa completo de lo que se viene en el año.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="campus-item">
+          <div class="campus-connector"><div class="campus-dot"></div><div class="campus-line"></div></div>
+          <div class="campus-body">
+            <div class="campus-name">⚡ Zona Crack</div>
+            <div class="campus-desc">Espacio que se irá alimentando durante el año con recursos adicionales para docentes y estudiantes.</div>
+            <div class="campus-sub">
+              <div class="campus-sub-item"><div class="csi-icon">🎭</div><div class="csi-content"><strong>Retos flash y rompehielo</strong>Perfectos para dinamizar la clase, romper el ambiente cuando el ánimo baja, o cerrar una sesión de forma divertida.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">🖼️</div><div class="csi-content"><strong>Fondos para Zoom / Meet</strong>Fondos temáticos de CTC para usar en videollamadas y clases virtuales.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">📝</div><div class="csi-content"><strong>Simulador de examen</strong>Los estudiantes pueden practicar el examen de entrada cuantas veces quieran. Las preguntas son similares, no iguales. <span style="font-weight:700;color:var(--red)">⚠️ Este simulador se hace sin IA.</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="campus-item">
+          <div class="campus-connector"><div class="campus-dot"></div><div class="campus-line"></div></div>
+          <div class="campus-body">
+            <div class="campus-name">📦 Capítulo 1, 2, 3...</div>
+            <div class="campus-desc">Cada capítulo tiene su propia sección con esta estructura:</div>
+            <div class="campus-sub">
+              <div class="campus-sub-item"><div class="csi-icon">📖</div><div class="csi-content"><strong>Introducción al capítulo</strong>Contexto y objetivos del módulo.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">💬</div><div class="csi-content"><strong>Foro del capítulo</strong>Como docente puedes crear las discusiones que necesites. Es tu espacio para fomentar reflexión y debate entre estudiantes.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">🎯</div><div class="csi-content"><strong>Misiones y niveles</strong>Cada capítulo contiene varias misiones. Cada misión se divide en niveles (actividades).</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="campus-item">
+          <div class="campus-connector"><div class="campus-dot"></div></div>
+          <div class="campus-body">
+            <div class="campus-name">🚀 Misión Demo Day (dentro del capítulo)</div>
+            <div class="campus-desc">La misión de evaluación de cada capítulo tiene una estructura específica:</div>
+            <div class="campus-sub">
+              <div class="campus-sub-item"><div class="csi-icon">📋</div><div class="csi-content"><strong>Introducción</strong>Explica la dinámica del Demo Day.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">📌</div><div class="csi-content"><strong>Indicación</strong>Qué deben hacer los estudiantes en esta clase.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">✅</div><div class="csi-content"><strong>Tarea — "Enviar bitácora"</strong>Aquí el estudiante presiona el botón. Solo eso — no escribe nada.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">🤖</div><div class="csi-content"><strong>Niveles autónomos con IA</strong>Mientras tú evalúas, los estudiantes trabajan en estos retos de forma autónoma.</div></div>
+              <div class="campus-sub-item"><div class="csi-icon">⭐</div><div class="csi-content"><strong>Encuesta de satisfacción</strong>Los estudiantes deben completarla al final del Demo Day.</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ESPECIALES -->
+    <div id="c-especiales" class="sec">
+      <div class="page-title">Retos y puntos de control</div>
+      <div class="page-desc">Elementos que enriquecen la experiencia — son parte de la clase, no de la evaluación formal.</div>
+      <div class="callout info">
+        <strong>Importante antes de leer</strong>
+        Los retos Crack, Reto Tu Futuro y los puntos de control son parte de la <strong>experiencia de aprendizaje</strong>. No se califican con la rúbrica — son los elementos que hacen que la clase sea más rica y que el proyecto llegue a mejor nivel.
+      </div>
+      <div class="special-items">
+        <div class="special-item">
+          <div class="si-icon">⚡</div>
+          <div>
+            <div class="si-title">Reto Crack</div>
+            <div class="si-body">Retos que hacen que el estudiante <strong>eleve su proyecto</strong> más allá del mínimo. Los encuentras marcados como <strong>opcionales en el cronograma de clases</strong> — no dentro del Genially. Opcionales no significa ignorarlos: si terminaste el capítulo a tiempo, son los siguientes en la lista. Si vas atrasado, primero termina lo evaluable.</div>
+          </div>
+        </div>
+        <div class="special-item">
+          <div class="si-icon">🚀</div>
+          <div>
+            <div class="si-title">Reto Tu Futuro</div>
+            <div class="si-body">Retos que preparan al estudiante para su <strong>vida profesional</strong>. También están marcados como <strong>opcionales en el cronograma de clases</strong>. Misma lógica: se hacen cuando el capítulo va al día o ya terminó. Son valiosos — no los saltes si tienes tiempo.</div>
+          </div>
+        </div>
+        <div class="special-item">
+          <div class="si-icon">📍</div>
+          <div>
+            <div class="si-title">Punto de Control</div>
+            <div class="si-body">Hito <strong>obligatorio</strong> a mitad del módulo. Su fecha está marcada en el <strong>cronograma de clases</strong>. Es un test que el estudiante puede repetir hasta sacar 100 — no es una calificación con rúbrica, es data de que están avanzando y aprendiendo los conceptos. Si no lo ves en el cronograma, pregunta a tu líder de proyectos.</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>La regla de los tiempos</strong>
+        ¿Terminé el capítulo antes? → Haz los retos Crack y Tu Futuro.<br>
+        ¿Voy atrasado? → Prioriza bitácora + lo evaluable. Los retos después.<br>
+        ¿Es el día del punto de control? → Hazlo sí o sí — está en el cronograma.
+      </div>
+    </div>
+
+    <!-- FÓRMULA DEL ÉXITO — SÁNDWICH -->
+    <div id="c-formula" class="sec">
+      <div class="page-title">La fórmula del éxito</div>
+      <div class="page-desc">Cómo sostener la experiencia completa — y qué priorizar cuando algo falla.</div>
+      <div class="prose" style="margin-bottom:20px">
+        <p>La experiencia CTC es como una hamburguesa perfecta. Todos los ingredientes son importantes — pero hay un orden claro de lo que sostiene todo y lo que da sabor.</p>
+      </div>
+
+      <div class="sandwich-wrap">
+        <div class="sandwich-layer sw-bread-t">
+          <div class="sw-icon">🍞</div>
+          <div class="sw-content">
+            <div class="sw-label">Tapa superior · Base de todo</div>
+            <div class="sw-title">Bitácora + Criterios de evaluación</div>
+            <div class="sw-desc">Son las tapas que sostienen la experiencia. Sin ellas no hay hamburguesa. La bitácora completa + los criterios de la rúbrica cumplidos = lo que nunca puede faltar.</div>
+          </div>
+        </div>
+        <div class="sandwich-layer sw-meat">
+          <div class="sw-icon">🥩</div>
+          <div class="sw-content">
+            <div class="sw-label">Carne · El corazón del capítulo</div>
+            <div class="sw-title">Punto de Control</div>
+            <div class="sw-desc">Es la evidencia de que los conceptos se están aprendiendo. Obligatorio, a mitad del módulo. Le da sustancia a todo el capítulo.</div>
+          </div>
+        </div>
+        <div class="sandwich-layer sw-veggie">
+          <div class="sw-icon">🥬</div>
+          <div class="sw-content">
+            <div class="sw-label">Lechuga · Lo que eleva el proyecto</div>
+            <div class="sw-title">Reto Crack + Reto Tu Futuro</div>
+            <div class="sw-desc">Opcionales en el cronograma de clases, pero son los que llevan el proyecto a Destacado y preparan al estudiante para su futuro. Si tienes tiempo, siempre van.</div>
+          </div>
+        </div>
+        <div class="sandwich-layer sw-sauce">
+          <div class="sw-icon">🫙</div>
+          <div class="sw-content">
+            <div class="sw-label">Salsas · El toque especial</div>
+            <div class="sw-title">Zona Crack</div>
+            <div class="sw-desc">Retos rompehielo, fondos zoom, simulador de examen. No son obligatorios en todas las clases, pero hacen la diferencia cuando la energía baja o necesitas cerrar con algo memorable.</div>
+          </div>
+        </div>
+        <div class="sandwich-layer sw-bread-t">
+          <div class="sw-icon">🍞</div>
+          <div class="sw-content">
+            <div class="sw-label">Tapa inferior · Sin esto no hay evaluación</div>
+            <div class="sw-title">Bitácora + Criterios de evaluación</div>
+            <div class="sw-desc">Recuerda: siempre vuelves a las tapas. Si algo se cancela o va mal, lo primero que proteges es que la bitácora esté completa en las misiones evaluables.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandwich-formula">
+        <span class="sf-chip" style="background:var(--gl);color:var(--g)">🍞 Bitácora + Criterios</span>
+        <span class="sf-plus">+</span>
+        <span class="sf-chip" style="background:var(--orange-l);color:var(--orange-d)">🥩 Punto de Control</span>
+        <span class="sf-plus">+</span>
+        <span class="sf-chip" style="background:var(--teal-l);color:var(--teal-d)">🥬 Retos</span>
+        <span class="sf-plus">+</span>
+        <span class="sf-chip" style="background:var(--purple-l);color:var(--purple-d)">🫙 Zona Crack</span>
+        <span class="sf-eq">=</span>
+        <span style="font-weight:800;color:var(--text)">Experiencia completa ✨</span>
+      </div>
+
+      <div class="callout warn" style="margin-top:20px">
+        <strong>Cuando algo falla</strong>
+        Cancelaciones, fallas técnicas, grupo atrasado — la respuesta siempre es la misma: <strong>protege las tapas primero</strong>. Que la bitácora esté completa en las misiones que se van a evaluar. Los demás ingredientes esperan, las tapas no.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 2 · DEMO DAY
+════════════════════════════════════════ -->
+<div id="tab-demoday" class="page">
+  <nav class="sidebar">
+    <div class="sl">Demo Day</div>
+    <button class="si on" onclick="showSec('d','d-que',this)">¿Qué es?</button>
+    <button class="si"    onclick="showSec('d','d-prep',this)">Preparación previa</button>
+    <button class="si"    onclick="showSec('d','d-dia',this)">Los 3 momentos</button>
+    <button class="si"    onclick="showSec('d','d-fallas',this)">Cuando algo falla</button>
+  </nav>
+  <div class="content">
+
+    <div id="d-que" class="sec on">
+      <div class="page-title">¿Qué es el Demo Day?</div>
+      <div class="page-desc">El cierre formal de cada capítulo — el hito de evaluación del módulo.</div>
+      <div class="prose">
+        <p>El Demo Day es la clase que <strong>cierra oficialmente un capítulo</strong>. Los estudiantes envían su bitácora presionando el botón en Campus, trabajan en retos autónomos de IA mientras tú evalúas, y reciben retroalimentación.</p>
+        <p>No es el único momento de feedback — en cada clase puedes y debes comentar la bitácora directamente en el Google Doc. Pero el Demo Day es el <strong>cierre oficial</strong>: la calificación que queda registrada para ese módulo.</p>
+      </div>
+      <div class="callout">
+        <strong>La fecha está en tu cronograma de clases</strong>
+        Cada capítulo tiene su Demo Day programado. Si el colegio cancela esa clase, igual lo das la siguiente — el Demo Day es inamovible.
+      </div>
+      <hr class="div">
+      <div class="h3">El envío es un botón, no un archivo</div>
+      <div class="prose">
+        <p>El estudiante va a la tarea del capítulo en Campus. Aparece un <strong>botón "Enviar bitácora"</strong>. Lo presiona y listo — no escribe nada, no sube ningún archivo.</p>
+        <p>Como la bitácora ya vive en la base de datos de CTC, en el momento en que el estudiante envía, tú puedes ver y evaluar su trabajo.</p>
+      </div>
+    </div>
+
+    <div id="d-prep" class="sec">
+      <div class="page-title">Preparación previa</div>
+      <div class="page-desc">El Demo Day rápido y justo se construye en cada clase del capítulo — no la noche anterior.</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Revisa la bitácora en cada clase</div>
+            <div class="step-text">No esperes al Demo Day para abrir la bitácora por primera vez. En cada clase, asómate a ver 2 o 3 grupos. Si ya conoces el avance, el Demo Day es solo confirmar lo que ya sabes.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Deja comentarios en el Google Doc</div>
+            <div class="step-text">Comenta directamente en la bitácora — ese es el mecanismo de feedback continuo. "El bloque Problema es muy genérico — ¿a quién afecta específicamente?" los orienta antes de la evaluación.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Verifica los links con anticipación</div>
+            <div class="step-text">La bitácora pide que el estudiante incluya links (app, web, dashboard). Ábrelos en clases previas — no el día del Demo Day. Si alguno no funciona, avisa con tiempo para que puedan corregirlo.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">4</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Identifica grupos con bajo avance</div>
+            <div class="step-text">Si ves que un equipo está muy atrasado, avísales directamente y coordina con el docente de la institución educativa para que los acompañe entre clases.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">5</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Anticipa a los estudiantes</div>
+            <div class="step-text">Una clase antes, recuérdales qué viene, qué deben tener completo en la bitácora, y que el envío es solo presionar el botón en Campus.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle alt">📐</div></div>
+          <div class="step-body">
+            <div class="step-title">Lee los criterios antes de llegar</div>
+            <div class="step-text">Los 3 criterios que evaluarás están en la pestaña <strong>Rúbricas</strong> de esta guía. Léelos antes del Demo Day — así sabes exactamente qué buscar y la evaluación es mucho más ágil.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="d-dia" class="sec">
+      <div class="page-title">Los 3 momentos del Demo Day</div>
+      <div class="page-desc">Más el cierre obligatorio después de clase.</div>
+      <div class="momento-flow">
+        <div class="momento">
+          <div class="momento-connector"><div class="momento-num">1</div><div class="momento-vline"></div></div>
+          <div class="momento-body">
+            <div class="momento-tag">Inicio de clase · ~15 min</div>
+            <div class="momento-title">Explica la dinámica y abre el envío</div>
+            <div class="momento-text">Explica cómo funciona: los estudiantes presionan el botón en Campus (no escriben nada), luego trabajan en los niveles autónomos de IA mientras tú evalúas. Dales hasta 15 minutos para enviar. Si algún grupo no puede, no es bloqueante — puedes evaluar igual.</div>
+          </div>
+        </div>
+        <div class="momento">
+          <div class="momento-connector"><div class="momento-num">2</div><div class="momento-vline"></div></div>
+          <div class="momento-body">
+            <div class="momento-tag">Durante la clase</div>
+            <div class="momento-title">Ellos trabajan autónomamente, tú evalúas</div>
+            <div class="momento-text">Mientras los estudiantes hacen los niveles autónomos con IA del Demo Day, tú abres Campus y evalúas bitácora por bitácora. Recuerda: <strong>en el Demo Day solo evalúas los 3 criterios de la rúbrica del capítulo</strong>. Ese foco es lo que te permite ir rápido. Si no alcanza el tiempo, continúas en la siguiente clase.</div>
+          </div>
+        </div>
+        <div class="momento">
+          <div class="momento-connector"><div class="momento-num">3</div><div class="momento-vline"></div></div>
+          <div class="momento-body">
+            <div class="momento-tag">Cierre de clase</div>
+            <div class="momento-title">Cierre y encuesta de satisfacción</div>
+            <div class="momento-text">Si hay tiempo, comparte brevemente con la clase 1-2 patrones que viste: qué estuvo bien en general, qué deben mejorar en el próximo capítulo. Los estudiantes completan la encuesta de satisfacción al finalizar.</div>
+          </div>
+        </div>
+        <div class="momento">
+          <div class="momento-connector"><div class="momento-num post">📨</div></div>
+          <div class="momento-body">
+            <div class="momento-tag">Después de clase · obligatorio</div>
+            <div class="momento-title">Reporta al equipo de Proyectos CTC</div>
+            <div class="momento-text">Avisa al equipo cómo salió el Demo Day: si fue bien, si hay grupos que necesitan seguimiento, y si necesitas la siguiente clase para terminar de evaluar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="d-fallas" class="sec">
+      <div class="page-title">Cuando algo falla</div>
+      <div class="page-desc">Siempre hay una ruta — y siempre empieza por las tapas del sándwich.</div>
+      <div class="expand-card open">
+        <div class="expand-hdr" onclick="toggleExpand(this)">
+          <div class="expand-hdr-left"><div class="expand-ico">📅</div><div class="expand-title">El colegio cancela la clase del Demo Day</div></div>
+          <span class="expand-arr">▼</span>
+        </div>
+        <div class="expand-body">
+          <p>El Demo Day es inamovible — siempre se da, aunque sea en otra fecha. Lo que haces: avisa al docente de la institución educativa que el Demo Day se pasa a la siguiente clase. Pídele que avise a los estudiantes para que usen ese tiempo extra en dejar la bitácora completa.</p>
+          <p>Nada más. Es simple.</p>
+        </div>
+      </div>
+      <div class="expand-card">
+        <div class="expand-hdr" onclick="toggleExpand(this)">
+          <div class="expand-hdr-left"><div class="expand-ico">🌐</div><div class="expand-title">Fallas técnicas o Genially caído</div></div>
+          <span class="expand-arr">▼</span>
+        </div>
+        <div class="expand-body">
+          <p>Prioriza la bitácora. Si la herramienta no funciona, que los estudiantes documenten su proceso en el Google Doc de todas formas — qué decidieron, qué aprendieron, qué harían. Eso sigue siendo evaluable.</p>
+          <p>Si el grupo viene con atraso acumulado por fallas técnicas, repórtalo al equipo de Proyectos <strong>con anticipación</strong> — no el día del Demo Day. Lo que no puede pasar es que ese día digan "ay es que veníamos con fallas" sin haberlo reportado antes.</p>
+        </div>
+      </div>
+      <div class="expand-card">
+        <div class="expand-hdr" onclick="toggleExpand(this)">
+          <div class="expand-hdr-left"><div class="expand-ico">🔗</div><div class="expand-title">El link del producto no abre</div></div>
+          <span class="expand-arr">▼</span>
+        </div>
+        <div class="expand-body">
+          <p>La solución es revisión clase a clase — detectarlo antes, no el día del Demo Day. Si aun así pasa:</p>
+          <p>(1) Intenta en otro navegador. (2) Avisa al grupo y dale una oportunidad en la siguiente clase. (3) Avisa al docente de la institución educativa para que el grupo lo corrija. (4) Evalúa lo que hay en la bitácora escrita y deja nota de que el link no funcionó.</p>
+        </div>
+      </div>
+      <div class="expand-card">
+        <div class="expand-hdr" onclick="toggleExpand(this)">
+          <div class="expand-hdr-left"><div class="expand-ico">⏱️</div><div class="expand-title">No alcanza el tiempo para evaluar todo</div></div>
+          <span class="expand-arr">▼</span>
+        </div>
+        <div class="expand-body">
+          <p>Continúas en la siguiente clase. Lo ideal es cerrar en el Demo Day, pero una evaluación bien hecha siempre vale más que una apresurada.</p>
+          <p>Lo que sí debes hacer ese día: dejar al menos una línea de comentario por grupo en el Google Doc. Un número sin feedback no le dice nada al estudiante.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 3 · RÚBRICAS
+════════════════════════════════════════ -->
+<div id="tab-rubricas" class="page">
+  <nav class="sidebar">
+    <div class="sl">Rúbricas</div>
+    <button class="si on" onclick="showSec('r','r-niveles',this)">Los 4 niveles</button>
+    <button class="si"    onclick="showSec('r','r-como',this)">Cómo evaluar</button>
+    <button class="si"    onclick="showSec('r','r-criterios',this)">Criterios por grado</button>
+  </nav>
+  <div class="content">
+
+    <div id="r-niveles" class="sec on">
+      <div class="page-title">Los 4 niveles de logro</div>
+      <div class="page-desc">Los mismos para todos los criterios, en todos los grados y capítulos.</div>
+      <div class="callout info">
+        <strong>Cómo funciona la evaluación ágil</strong>
+        No hay un texto diferente por nivel para cada criterio. Lees el criterio que describe lo esperado y seleccionas en cuál de estos 4 niveles está el estudiante. Simple y rápido.
+      </div>
+      <div class="levels-visual">
+        <div class="lv lv-i">
+          <div class="lv-head">🔴 Inicio</div>
+          <div class="lv-body"><ul><li>Entrega incompleta o muy básica</li><li>La solución no funciona o no se entiende</li><li>No hay coherencia con el problema</li></ul></div>
+        </div>
+        <div class="lv lv-p">
+          <div class="lv-head">🟡 En desarrollo</div>
+          <div class="lv-body"><ul><li>La idea se entiende pero no cierra</li><li>Funciona parcialmente o con errores</li><li>Requiere acompañamiento</li></ul></div>
+        </div>
+        <div class="lv lv-l">
+          <div class="lv-head">🟢 Logrado ✓</div>
+          <div class="lv-body"><ul><li>Cumple todos los criterios del módulo</li><li>La solución funciona correctamente</li><li>Coherente con el problema y los datos</li></ul></div>
+        </div>
+        <div class="lv lv-d">
+          <div class="lv-head">🔵 Destacado</div>
+          <div class="lv-body"><ul><li>Va más allá de lo solicitado</li><li>Incorpora mejoras adicionales</li><li>Decisiones propias bien fundamentadas</li></ul></div>
+        </div>
+      </div>
+      <div class="callout danger">
+        <strong>La expectativa es Logrado — evalúa lo que hay, no el esfuerzo</strong>
+        Logrado es lo que esperamos de todos. Destacado es el extra mile real. Si calificas Logrado a algo que claramente está en Desarrollo, pierdes la utilidad de la escala. La nota dice dónde están hoy — el feedback les dice cómo llegar más lejos.
+      </div>
+      <div class="sobre-box">
+        <div class="sb-title">⭐ Marca adicional: Proyecto Sobresaliente</div>
+        <div class="sb-desc">No es un nivel de la rúbrica — es una marca especial. Se activa únicamente cuando el proyecto obtiene entre 95 y 100 puntos en total Y cumple al menos 2 de estos criterios:</div>
+        <div class="chips">
+          <span class="chip">Originalidad / autenticidad</span>
+          <span class="chip">Profundidad / impacto</span>
+          <span class="chip">Valor agregado</span>
+          <span class="chip">Autonomía en decisiones</span>
+          <span class="chip">Uso pertinente de herramientas extra</span>
+          <span class="chip">Mejora de calidad global</span>
+          <span class="chip">Esfuerzo o trabajo en equipo destacado</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="r-como" class="sec">
+      <div class="page-title">Cómo evaluar con la rúbrica</div>
+      <div class="page-desc">El proceso real en el Demo Day.</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Lee el criterio antes de abrir la bitácora</div>
+            <div class="step-text">¿Qué pide exactamente? ¿Qué verías en una entrega Lograda? Tenerlo claro antes de revisar evita evaluar por impresión general.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Ve directo a la misión correspondiente</div>
+            <div class="step-text">Cada criterio apunta a una misión específica. Ve directo a esa sección en la bitácora — no la leas entera. Eso te ahorra tiempo.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Verifica el link cuando el criterio lo pide</div>
+            <div class="step-text">Algunos criterios incluyen "Verificar en el link de la app/web". En esos casos no alcanza con lo escrito — tienes que abrir el producto y comprobarlo.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-circle">4</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-title">Selecciona el nivel y deja un comentario</div>
+            <div class="step-text">Marca el nivel en Campus. Luego escribe al menos una línea: qué está bien y qué necesita mejorar. Un número solo no orienta a nadie.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="r-criterios" class="sec">
+      <div class="page-title">Criterios exactos por grado</div>
+      <div class="page-desc">Estos son los criterios tal como aparecen en las rúbricas oficiales — sin cambiar ni una palabra.</div>
+
+      <div class="pills" style="margin-bottom:24px">
+        <button class="pill on" onclick="setRG('rg9',this)">Grado 9 · App</button>
+        <button class="pill"    onclick="setRG('rg10',this)">Grado 10 · Web</button>
+        <button class="pill"    onclick="setRG('rg11',this)">Grado 11 · Marketing</button>
+      </div>
+
+      <!-- GRADO 9 -->
+      <div id="rg9" class="rg on">
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 1 · Diagnostica y comprende</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Nivel 4: Justificamos el problema</div></div>
+              <div class="rub-crit-text">Explica por qué el problema es importante con ejemplos reales, indicando a quién afecta y sus consecuencias.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3: ¿Por qué una App?</div></div>
+              <div class="rub-crit-text">Identifica a quién va dirigida la app y en qué espacios o situaciones específicas se puede encontrar a ese público.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 4: Mini Canvas</div></div>
+              <div class="rub-crit-text">Los bloques Problema, Solución y Público del Mini Canvas son coherentes entre sí y la solución responde directamente al problema del público descrito.</div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 2 · Construye y crea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3: Flujo visual claro (UX)</div></div>
+              <div class="rub-crit-text">El análisis del recorrido de la app distingue qué parte de la navegación es clara y qué parte puede confundir al usuario.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Crea tu base de datos</div></div>
+              <div class="rub-crit-text">La base de datos tiene los campos que la app necesita para funcionar y cada campo tiene un propósito claro relacionado con el problema.
+                <em>⚠️ Verificar en el link de la base de datos</em>
+              </div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3: Diseña tus pantallas</div></div>
+              <div class="rub-crit-text">La acción principal de la app se puede completar de inicio a fin sin interrupciones y las pantallas muestran contenido real del problema elegido.
+                <em>⚠️ Verificar en el link de la app</em>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 3 · Mejora y testea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: Diagnóstico — ¿mi app resuelve el problema?</div></div>
+              <div class="rub-crit-text">El diagnóstico señala con precisión qué parte específica de la app no resuelve bien el problema o en qué punto el usuario se bloquea o se confunde.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: Diagnóstico — ¿mi app resuelve el problema?</div></div>
+              <div class="rub-crit-text">La información presentada en la app es relevante y cumple una función clara para el usuario.
+                <em>⚠️ Verificar en el link de la app</em>
+              </div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Mejora con sentido</div></div>
+              <div class="rub-crit-text">La mejora implementada responde a un problema de uso concreto identificado y hay conexión directa entre lo que se detectó y lo que cambió en la app.
+                <em>⚠️ Verificar en el link de la app</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADO 10 -->
+      <div id="rg10" class="rg">
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 1 · Diagnostica y comprende</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: Nace tu incubadora</div></div>
+              <div class="rub-crit-text">La elección del emprendimiento está justificada con un argumento que conecta las características del negocio con una necesidad digital real, más allá de la preferencia personal.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 4: Conoce a tu cliente — Investigación de campo</div></div>
+              <div class="rub-crit-text">Las tablas de observación y de competidores tienen información específica del negocio elegido que permite entender su entorno real y diferenciarlo de otros negocios similares.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 5: Radiografía digital — FODA</div></div>
+              <div class="rub-crit-text">La conclusión sobre para qué servirá la web surge de un hallazgo específico del FODA — hay conexión directa entre el análisis y la propuesta digital.</div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 2 · Construye y crea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: El plano maestro</div></div>
+              <div class="rub-crit-text">El flujo diseñado permite al cliente del emprendimiento completar la acción principal y la justificación explica por qué ese recorrido tiene sentido para ese cliente específico.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Laboratorio de creación visual</div></div>
+              <div class="rub-crit-text">La web tiene secciones con contenido real del emprendimiento y cada sección funciona sin errores al navegarla.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Secciones — información del negocio</div></div>
+              <div class="rub-crit-text">La información clave del negocio (qué venden, precio y contacto) está presente y accesible en la web sin necesidad de buscar entre secciones.
+                <em>⚠️ Verificar navegando como cliente</em>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 3 · Mejora y testea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: Escape Room — El código oculto</div></div>
+              <div class="rub-crit-text">La falla identificada en la web es concreta e impacta en la experiencia del cliente del emprendimiento.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Retro Crack: Feedback real</div></div>
+              <div class="rub-crit-text">La mejora implementada responde a feedback recogido y hay conexión directa entre lo que dijeron y el cambio realizado en la web.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3: El hack de optimización final</div></div>
+              <div class="rub-crit-text">Los cambios técnicos implementados con HTML, CSS o JS hacen que la experiencia del usuario en la web sea mejor que en la versión del Cap. 2.
+                <em>⚠️ Verificar en el link</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADO 11 -->
+      <div id="rg11" class="rg">
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 1 · Diagnostica y comprende</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 1: Banco de ideas locas</div></div>
+              <div class="rub-crit-text">Cada idea está justificada con un problema o necesidad real observada — las justificaciones son concretas y distintas entre sí.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Nuestra decisión final</div></div>
+              <div class="rub-crit-text">Presenta la idea de negocio elegida y explica por qué responde a un problema real y vale la pena desarrollarla.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3: Propósito, nombre y lema</div></div>
+              <div class="rub-crit-text">El propósito, el nombre comercial y el lema son coherentes entre sí y con la idea de negocio — los tres comunican la misma promesa.</div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 2 · Construye y crea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 5: Base de datos + Dashboard</div></div>
+              <div class="rub-crit-text">Selecciona una fuente de datos pertinente a la competencia de su negocio y presenta la información organizada para su análisis (organizada en columnas claras, sin datos mezclados o confusos).</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 6: El dashboard habla</div></div>
+              <div class="rub-crit-text">Las decisiones del negocio están argumentadas con datos del dashboard — la argumentación conecta cada decisión con evidencia específica del análisis, no con intuición. El dato debe ser verificable en el dashboard.</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Dashboard</div></div>
+              <div class="rub-crit-text">Presenta un dashboard que permite identificar información clave de la competencia para entender el mercado (incluye gráficos o tablas que muestran comparaciones o patrones relevantes).</div>
+            </div>
+          </div>
+        </div>
+        <div class="rub-chapter">
+          <div class="rub-ch-title">Capítulo 3 · Mejora y testea</div>
+          <div class="rub-criteria">
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misiones 1: Definición final de la empresa</div></div>
+              <div class="rub-crit-text">Presenta una propuesta de valor clara y diferenciada basada en el análisis de la competencia (explica qué hace diferente a la empresa y por qué eso importa para el cliente).</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 3 y 4: Contenidos y piezas</div></div>
+              <div class="rub-crit-text">Presenta una campaña con contenidos y piezas coherentes con el objetivo, el público y el mensaje (la grilla y las piezas reflejan el mensaje y están alineadas al público y canal).</div>
+            </div>
+            <div class="rub-criterion">
+              <div class="rub-crit-header"><div class="rub-crit-mission">Misión 2: Estrategia de campaña digital</div></div>
+              <div class="rub-crit-text">Las decisiones de la estrategia son coherentes entre sí (objetivo, público, mensaje y canales) y se sustentan en información del dashboard.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /r-criterios -->
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 4 · FEEDBACK
+════════════════════════════════════════ -->
+<div id="tab-feedback" class="page">
+  <nav class="sidebar">
+    <div class="sl">Feedback</div>
+    <button class="si on" onclick="showSec('f','f-principios',this)">Qué debe tener</button>
+    <button class="si"    onclick="showSec('f','f-tecnicas',this)">Técnicas rápidas</button>
+    <button class="si"    onclick="showSec('f','f-ia',this)">Usar IA sin complicarte</button>
+  </nav>
+  <div class="content">
+
+    <div id="f-principios" class="sec on">
+      <div class="page-title">Qué debe tener un buen feedback</div>
+      <div class="page-desc">Piensa en esto: reconocer, decir qué falta y dejar un siguiente paso claro.</div>
+
+      <div class="grid-2">
+        <div class="g-card">
+          <span class="gc-icon">✅</span>
+          <div class="gc-title">Reconoce algo concreto</div>
+          <div class="gc-body">No digas solo “bien”. Di exactamente qué parte sí está lograda.</div>
+        </div>
+        <div class="g-card">
+          <span class="gc-icon">🔎</span>
+          <div class="gc-title">Nombra qué falta</div>
+          <div class="gc-body">Di qué parte está incompleta, confusa o débil según el criterio.</div>
+        </div>
+        <div class="g-card">
+          <span class="gc-icon">🛠</span>
+          <div class="gc-title">Di qué hacer ahora</div>
+          <div class="gc-body">El estudiante debe salir sabiendo qué corregir para subir de nivel.</div>
+        </div>
+        <div class="g-card">
+          <span class="gc-icon">💬</span>
+          <div class="gc-title">Escribe simple</div>
+          <div class="gc-body">Una idea clara vale más que un párrafo largo que no orienta.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <strong>Fórmula rápida</strong>
+        Reconozco lo que sí lograste + te digo qué falta + te digo cómo mejorarlo.
+      </div>
+    </div>
+
+    <div id="f-tecnicas" class="sec">
+      <div class="page-title">Técnicas rápidas</div>
+      <div class="page-desc">Tres formas fáciles de dar feedback sin enredarte.</div>
+
+      <div class="tech-card">
+        <div class="tech-hdr"><span style="font-size:22px">1️⃣</span><div class="tech-name">Reconozco · Falta · Siguiente paso</div></div>
+        <div class="tech-body">
+          <p><strong>Úsala cuando:</strong> quieres dejar un comentario corto y útil.</p>
+          <div class="tech-example"><strong>Ejemplo:</strong> “Su problema sí está claro. Falta explicar mejor la consecuencia real. Para mejorar, agreguen qué pasa cuando este problema ocurre y a quién afecta.”</div>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-hdr"><span style="font-size:22px">2️⃣</span><div class="tech-name">Semáforo</div></div>
+        <div class="tech-body">
+          <p><strong>Úsala cuando:</strong> quieres que vean rápido qué está bien y qué ajustar.</p>
+          <div class="tech-example">🟢 <strong>Bien:</strong> el problema sí está definido.<br><br>🟡 <strong>Ojo:</strong> la justificación todavía está general.<br><br>🔴 <strong>Ajusten:</strong> agreguen un ejemplo concreto del impacto.</div>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-hdr"><span style="font-size:22px">3️⃣</span><div class="tech-name">Modelo listo para copiar</div></div>
+        <div class="tech-body">
+          <div class="tech-example">“Van bien en [parte lograda]. Para subir este criterio, necesitan mejorar [parte débil]. El siguiente paso es [acción concreta].”</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="f-ia" class="sec">
+      <div class="page-title">Usar IA sin complicarte</div>
+      <div class="page-desc">La IA no reemplaza tu criterio. Te ayuda a redactar más rápido.</div>
+
+      <div class="special-items">
+        <div class="special-item">
+          <div class="si-icon">🧠</div>
+          <div>
+            <div class="si-title">Paso 1: escribe tu idea en una línea</div>
+            <div class="si-body">Ejemplo: “El grupo tiene claro el problema, pero su justificación sigue muy general”.</div>
+          </div>
+        </div>
+        <div class="special-item">
+          <div class="si-icon">✍️</div>
+          <div>
+            <div class="si-title">Paso 2: pega un prompt simple</div>
+            <div class="si-body">Usa uno de estos prompts y luego revisa que sí responda al criterio real.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-hdr"><span style="font-size:22px">📌</span><div class="tech-name">Prompt 1 · Mejorar un comentario</div></div>
+        <div class="tech-body">
+          <div class="tech-example">Convierte este comentario en un feedback claro, breve y motivador para estudiantes de colegio. Debe reconocer algo bueno, decir qué falta y cerrar con un siguiente paso: [pega aquí tu comentario].</div>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-hdr"><span style="font-size:22px">📌</span><div class="tech-name">Prompt 2 · Redactar feedback desde cero</div></div>
+        <div class="tech-body">
+          <div class="tech-example">Escribe un feedback breve para un grupo de [grado]. El criterio evaluado es: [criterio]. El grupo logró: [logro]. Necesita mejorar: [aspecto]. Quiero que suene claro, accionable y alentador.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Antes de pegar cualquier feedback</strong>
+        Revisa siempre 3 cosas: que sea claro, que sí responda al criterio y que deje una acción concreta.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TAB 5 · PRACTICA
+════════════════════════════════════════ -->
+<div id="tab-practica" class="page-full">
+  <div class="sim-wrap">
+    <div class="page-title" style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px">Práctica de evaluación</div>
+    <div class="page-desc" style="font-size:14px;color:var(--text3);margin-bottom:14px">Lee el caso de un grupo, elige el nivel de logro y revisa el feedback sugerido.</div>
+    <div class="callout info" style="margin-bottom:20px"><strong>Cómo usar esta práctica</strong>1. Lee el caso. 2. Elige el nivel que le pondrías al grupo. 3. Mira un ejemplo de feedback claro para ese nivel.</div>
+
+    <div class="pills" style="margin-bottom:28px" id="practice-grade-pills">
+      <button class="pill on" onclick="setPracticeGrade('g9',this)">Grado 9 · App</button>
+      <button class="pill" onclick="setPracticeGrade('g10',this)">Grado 10 · Web</button>
+      <button class="pill" onclick="setPracticeGrade('g11',this)">Grado 11 · Marketing</button>
+    </div>
+
+    <div class="bita-preview" style="margin-bottom:18px">
+      <div class="bp-top">
+        <div class="bp-mission" id="practice-mission">📋 Cap. 1 · Justificamos el problema</div>
+        <div class="bp-grade" id="practice-grade-label">Grado 9</div>
+      </div>
+      <div class="bp-body">
+        <div class="bp-qlabel">Caso del grupo</div>
+        <div class="bp-question" id="practice-question">El grupo explicó el problema, pero su justificación sigue muy general.</div>
+        <div class="callout" style="margin:12px 0 16px 0">
+          <strong>Lo que presentó el grupo</strong>
+          <span id="practice-work">“Queremos resolver la pérdida de útiles en el colegio. Esto es importante porque pasa seguido y a muchos estudiantes les incomoda.”</span>
+        </div>
+        <div class="lp-label">¿Qué nivel de logro le pondrías?</div>
+        <div class="level-picker" id="practice-levels" style="margin-bottom:14px">
+          <button class="lp p-i" onclick="choosePracticeLevel('inicio',this)">🔴 Inicio</button>
+          <button class="lp p-p" onclick="choosePracticeLevel('proceso',this)">🟡 En desarrollo</button>
+          <button class="lp p-l" onclick="choosePracticeLevel('logrado',this)">🟢 Logrado</button>
+          <button class="lp p-d" onclick="choosePracticeLevel('destacado',this)">🔵 Destacado</button>
+        </div>
+        <div class="fb-reveal show" id="practice-feedback-box" style="display:block">
+          <div class="fr-ok">
+            <div class="fr-icon">💬</div>
+            <div class="fr-title">Feedback sugerido</div>
+            <div class="fr-text" id="practice-feedback-text">Elige un nivel para ver un ejemplo de feedback listo para usar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="g-card">
+        <span class="gc-icon">👀</span>
+        <div class="gc-title">Qué mirar</div>
+        <div class="gc-body" id="practice-lookfor">Que el grupo explique a quién afecta el problema y cuál es la consecuencia real.</div>
+      </div>
+      <div class="g-card">
+        <span class="gc-icon">🗣</span>
+        <div class="gc-title">Tip docente</div>
+        <div class="gc-body">Tu feedback no tiene que ser largo. Tiene que decir qué sí logró, qué falta y qué hacer después.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ── TAB NAV ──────────────────────────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.page, .page-full').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ── SECTION NAV ──────────────────────────────────────────────────────────────
+function showSec(pageKey, secId, btn) {
+  var page = btn.closest('.page');
+  page.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  page.querySelectorAll('.si').forEach(b => b.classList.remove('on'));
+  document.getElementById(secId).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ── RUBRIC GRADE TABS ────────────────────────────────────────────────────────
+function setRG(id, btn) {
+  document.querySelectorAll('.rg').forEach(r => r.classList.remove('on'));
+  btn.closest('#r-criterios').querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ── EXPAND CARDS ──────────────────────────────────────────────────────────────
+function toggleExpand(hdr) {
+  hdr.closest('.expand-card').classList.toggle('open');
+}
+
+// ── FEEDBACK COACH DATA ──────────────────────────────────────────────────────
+var AI = { grade: null, critIdx: null, critText: null, level: null, issue: null, choice: null, options: [] };
+
+var CRITERIA = {
+  g9: [
+    { m: 'Nivel 4: Justificamos el problema',           t: 'Explica por qué el problema es importante con ejemplos reales, indicando a quién afecta y sus consecuencias.' },
+    { m: 'Misión 3: ¿Por qué una App?',                  t: 'Identifica a quién va dirigida la app y en qué espacios o situaciones específicas se puede encontrar a ese público.' },
+    { m: 'Misión 4: Mini Canvas',                        t: 'Los bloques Problema, Solución y Público del Mini Canvas son coherentes entre sí y la solución responde directamente al problema del público descrito.' },
+    { m: 'Misión 3: Flujo visual claro (UX)',             t: 'El análisis del recorrido de la app distingue qué parte de la navegación es clara y qué parte puede confundir al usuario.' },
+    { m: 'Misión 2: Crea tu base de datos',              t: 'La base de datos tiene los campos que la app necesita para funcionar y cada campo tiene un propósito claro relacionado con el problema.' },
+    { m: 'Misión 3: Diseña tus pantallas',               t: 'La acción principal de la app se puede completar de inicio a fin sin interrupciones y las pantallas muestran contenido real del problema elegido.' },
+    { m: 'Misión 1: Diagnóstico — ¿mi app resuelve el problema? (precisión)', t: 'El diagnóstico señala con precisión qué parte específica de la app no resuelve bien el problema o en qué punto el usuario se bloquea o se confunde.' },
+    { m: 'Misión 1: Diagnóstico — ¿mi app resuelve el problema? (relevancia)', t: 'La información presentada en la app es relevante y cumple una función clara para el usuario.' },
+    { m: 'Misión 2: Mejora con sentido',                 t: 'La mejora implementada responde a un problema de uso concreto identificado y hay conexión directa entre lo que se detectó y lo que cambió en la app.' }
+  ],
+  g10: [
+    { m: 'Misión 1: Nace tu incubadora',                 t: 'La elección del emprendimiento está justificada con un argumento que conecta las características del negocio con una necesidad digital real, más allá de la preferencia personal.' },
+    { m: 'Misión 4: Conoce a tu cliente — Investigación de campo', t: 'Las tablas de observación y de competidores tienen información específica del negocio elegido que permite entender su entorno real y diferenciarlo de otros negocios similares.' },
+    { m: 'Misión 5: Radiografía digital — FODA',         t: 'La conclusión sobre para qué servirá la web surge de un hallazgo específico del FODA — hay conexión directa entre el análisis y la propuesta digital.' },
+    { m: 'Misión 1: El plano maestro',                   t: 'El flujo diseñado permite al cliente del emprendimiento completar la acción principal y la justificación explica por qué ese recorrido tiene sentido para ese cliente específico.' },
+    { m: 'Misión 2: Laboratorio de creación visual',     t: 'La web tiene secciones con contenido real del emprendimiento y cada sección funciona sin errores al navegarla.' },
+    { m: 'Misión 2: Secciones — información del negocio', t: 'La información clave del negocio (qué venden, precio y contacto) está presente y accesible en la web sin necesidad de buscar entre secciones.' },
+    { m: 'Misión 1: Escape Room — El código oculto',     t: 'La falla identificada en la web es concreta e impacta en la experiencia del cliente del emprendimiento.' },
+    { m: 'Retro Crack: Feedback real',                   t: 'La mejora implementada responde a feedback recogido y hay conexión directa entre lo que dijeron y el cambio realizado en la web.' },
+    { m: 'Misión 3: El hack de optimización final',      t: 'Los cambios técnicos implementados con HTML, CSS o JS hacen que la experiencia del usuario en la web sea mejor que en la versión del Cap. 2.' }
+  ],
+  g11: [
+    { m: 'Misión 1: Banco de ideas locas',               t: 'Cada idea está justificada con un problema o necesidad real observada — las justificaciones son concretas y distintas entre sí.' },
+    { m: 'Misión 2: Nuestra decisión final',             t: 'Presenta la idea de negocio elegida y explica por qué responde a un problema real y vale la pena desarrollarla.' },
+    { m: 'Misión 3: Propósito, nombre y lema',           t: 'El propósito, el nombre comercial y el lema son coherentes entre sí y con la idea de negocio — los tres comunican la misma promesa.' },
+    { m: 'Misión 5: Base de datos + Dashboard',          t: 'Selecciona una fuente de datos pertinente a la competencia de su negocio y presenta la información organizada para su análisis (organizada en columnas claras, sin datos mezclados o confusos).' },
+    { m: 'Misión 6: El dashboard habla',                 t: 'Las decisiones del negocio están argumentadas con datos del dashboard — la argumentación conecta cada decisión con evidencia específica del análisis, no con intuición. El dato debe ser verificable en el dashboard.' },
+    { m: 'Dashboard',                                    t: 'Presenta un dashboard que permite identificar información clave de la competencia para entender el mercado (incluye gráficos o tablas que muestran comparaciones o patrones relevantes).' },
+    { m: 'Misiones 1: Definición final de la empresa',   t: 'Presenta una propuesta de valor clara y diferenciada basada en el análisis de la competencia (explica qué hace diferente a la empresa y por qué eso importa para el cliente).' },
+    { m: 'Misión 3 y 4: Contenidos y piezas',            t: 'Presenta una campaña con contenidos y piezas coherentes con el objetivo, el público y el mensaje (la grilla y las piezas reflejan el mensaje y están alineadas al público y canal).' },
+    { m: 'Misión 2: Estrategia de campaña digital',      t: 'Las decisiones de la estrategia son coherentes entre sí (objetivo, público, mensaje y canales) y se sustentan en información del dashboard.' }
+  ]
+};
+
+var GRADE_LABELS = { g9:'Grado 9 (App funcional)', g10:'Grado 10 (Página web de emprendimiento)', g11:'Grado 11 (Marketing digital)' };
+var LEVEL_LABELS = { inicio:'Inicio', proceso:'En desarrollo', logrado:'Logrado', destacado:'Destacado' };
+var ISSUE_OPTIONS = {
+  inicio: [
+    { id:'incompleto', label:'Está incompleto o muy básico' },
+    { id:'generico', label:'Dice ideas muy generales' },
+    { id:'desconexion', label:'No conecta con el problema o criterio' }
+  ],
+  proceso: [
+    { id:'falta_evidencia', label:'Va bien, pero le falta evidencia o precisión' },
+    { id:'falta_justificar', label:'Le falta justificar mejor sus decisiones' },
+    { id:'error_parcial', label:'Hay avance, pero todavía hay errores que afectan el resultado' }
+  ],
+  logrado: [
+    { id:'pulir', label:'Cumple, pero todavía puede pulirse' },
+    { id:'profundizar', label:'Cumple, pero puede profundizar más' },
+    { id:'sostener', label:'Cumple y debe sostener ese nivel' }
+  ],
+  destacado: [
+    { id:'escalar', label:'Está muy bien y puede llevarlo más lejos' },
+    { id:'transferir', label:'Está muy bien y puede explicar por qué funciona' },
+    { id:'refinar', label:'Está muy bien, pero aún puede refinar detalles' }
+  ]
+};
+
+function aiGrade(g, btn) {
+  document.getElementById('ai-grade-sel').querySelectorAll('.sel-opt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  AI.grade = g;
+  AI.critIdx = null;
+  AI.critText = null;
+  AI.issue = null;
+  AI.choice = null;
+  document.getElementById('ai-crit-display').innerHTML = '<em>Selecciona un criterio</em>';
+  document.getElementById('ai-issue-sel').innerHTML = '<div style="font-size:13px;color:var(--text3);font-style:italic;padding:10px 0">Ahora elige criterio y nivel</div>';
+  resetCoachOutputs();
+  var sel = document.getElementById('ai-crit-sel');
+  sel.innerHTML = '';
+  var grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px';
+  CRITERIA[g].forEach(function(c, i) {
+    var b = document.createElement('button');
+    b.className = 'sel-opt';
+    b.style.textAlign = 'left';
+    b.style.fontSize = '12px';
+    b.innerHTML = '<span style="font-size:10px;color:var(--text3);font-family:var(--mono);display:block;margin-bottom:3px">' + c.m + '</span>';
+    b.onclick = function() {
+      grid.querySelectorAll('.sel-opt').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      AI.critIdx = i;
+      AI.critText = c.t;
+      document.getElementById('ai-crit-display').textContent = c.t;
+      buildIssueOptions();
+      tryEnableAI();
+    };
+    grid.appendChild(b);
+  });
+  sel.appendChild(grid);
+  tryEnableAI();
+}
+
+function aiLevel(lv, btn) {
+  document.getElementById('ai-level-sel').querySelectorAll('.sel-opt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  AI.level = lv;
+  AI.issue = null;
+  resetCoachOutputs();
+  buildIssueOptions();
+  tryEnableAI();
+}
+
+function buildIssueOptions() {
+  var box = document.getElementById('ai-issue-sel');
+  if (!AI.level || AI.critIdx === null) {
+    box.innerHTML = '<div style="font-size:13px;color:var(--text3);font-style:italic;padding:10px 0">Elige criterio y nivel para ver opciones sugeridas</div>';
+    return;
+  }
+  box.innerHTML = '';
+  var grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:6px';
+  ISSUE_OPTIONS[AI.level].forEach(function(issue) {
+    var b = document.createElement('button');
+    b.className = 'sel-opt';
+    b.style.textAlign = 'left';
+    b.textContent = issue.label;
+    b.onclick = function() {
+      grid.querySelectorAll('.sel-opt').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      AI.issue = issue.id;
+      tryEnableAI();
+    };
+    grid.appendChild(b);
+  });
+  box.appendChild(grid);
+}
+
+function tryEnableAI() {
+  document.getElementById('ai-gen-btn').disabled = !(AI.grade && AI.critIdx !== null && AI.level && AI.issue);
+}
+
+function resetCoachOutputs() {
+  AI.choice = null;
+  AI.options = [];
+  ['ai-result','coach-review','coach-final'].forEach(function(id){
+    document.getElementById(id).classList.remove('show');
+  });
+  var check = document.getElementById('coach-check-btn');
+  if (check) check.disabled = true;
+}
+
+function buildCoachOptions() {
+  if (!AI.grade || AI.critIdx === null || !AI.level || !AI.issue) return;
+  resetCoachOutputs();
+  var crit = CRITERIA[AI.grade][AI.critIdx];
+  AI.options = makeFeedbackOptions(crit, AI.level, AI.issue);
+  var wrap = document.getElementById('coach-options');
+  wrap.innerHTML = '';
+  AI.options.forEach(function(opt, idx) {
+    var btn = document.createElement('button');
+    btn.className = 'sel-opt';
+    btn.style.textAlign = 'left';
+    btn.style.padding = '14px 16px';
+    btn.innerHTML = '<span style="display:block;font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:6px">Opción ' + String.fromCharCode(65 + idx) + '</span>' + opt.text;
+    btn.onclick = function() {
+      wrap.querySelectorAll('.sel-opt').forEach(x => x.classList.remove('on'));
+      btn.classList.add('on');
+      AI.choice = idx;
+      document.getElementById('coach-check-btn').disabled = false;
+    };
+    wrap.appendChild(btn);
+  });
+  document.getElementById('ai-result').classList.add('show');
+}
+
+function clearCoachSelection() {
+  AI.choice = null;
+  document.getElementById('coach-options').querySelectorAll('.sel-opt').forEach(x => x.classList.remove('on'));
+  document.getElementById('coach-check-btn').disabled = true;
+  document.getElementById('coach-review').classList.remove('show');
+  document.getElementById('coach-final').classList.remove('show');
+}
+
+function checkCoachChoice() {
+  if (AI.choice === null) return;
+  var crit = CRITERIA[AI.grade][AI.critIdx];
+  var chosen = AI.options[AI.choice];
+  var draft = document.getElementById('ai-draft').value.trim();
+  var review = document.getElementById('coach-review-text');
+  var explainGood = 'Esta opción funciona porque nombra el criterio, reconoce algo concreto, dice exactamente qué falta y deja una siguiente acción clara. El estudiante sabe qué mantener y qué ajustar.';
+  var explainBad = 'Esta opción no es la mejor porque se queda genérica o corrige sin orientar. Puede sonar dura, vaga o poco útil para que el estudiante sepa cómo mejorar.';
+  review.innerHTML =
+    '<div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:' + (chosen.good ? 'var(--g)' : 'var(--red)') + ';margin-bottom:8px">' +
+    (chosen.good ? 'Buena elección' : 'Podría mejorar') +
+    '</div>' +
+    '<div>' + (chosen.good ? explainGood : explainBad) + '</div>' +
+    '<div style="margin-top:10px"><strong>Clave docente:</strong> ' + chosen.reason + '</div>' +
+    (draft ? '<div style="margin-top:10px"><strong>Ojo con tu borrador:</strong> úsalo como base, pero asegúrate de mantener claridad, acción concreta y tono motivador.</div>' : '');
+  document.getElementById('coach-review').classList.add('show');
+
+  var finalText = buildSuggestedFeedback(crit, AI.level, AI.issue);
+  document.getElementById('coach-final-text').innerHTML = finalText.replace(/\n/g, '<br>');
+  document.getElementById('coach-prompt-text').textContent = buildPrompt(crit, AI.level, AI.issue, draft, finalText);
+  document.getElementById('coach-final').classList.add('show');
+}
+
+function makeFeedbackOptions(crit, level, issue) {
+  var levelName = LEVEL_LABELS[level];
+  var baseGood = buildSuggestedFeedback(crit, level, issue);
+  var generic = 'Buen esfuerzo. Vas en ' + levelName + ', pero todavía puedes mejorar. Revisa tu trabajo y corrige lo que haga falta para que quede mejor.';
+  var harsh = 'Esto todavía no cumple bien con lo esperado en ' + crit.m + '. Está confuso y debes rehacerlo para que tenga sentido.';
+  var almost = buildAlmostGoodFeedback(crit, level, issue);
+  return shuffle([
+    { text: baseGood, good: true, reason: 'Menciona el criterio, aterriza qué falta y propone una mejora accionable.' },
+    { text: generic, good: false, reason: 'No dice qué parte del trabajo necesita mejora ni qué acción concreta debe hacer el estudiante.' },
+    { text: level === 'destacado' ? almost : harsh, good: false, reason: level === 'destacado' ? 'Reconoce el logro, pero no ayuda a llevarlo más lejos ni señala cómo seguir creciendo.' : 'Corrige, pero sin explicar con claridad qué ajustar para avanzar.' }
+  ]);
+}
+
+function buildAlmostGoodFeedback(crit, level, issue) {
+  return 'Tu trabajo está bien encaminado y se nota esfuerzo en ' + crit.m + '. Sigue así y trata de mejorarlo un poco más para que quede todavía más fuerte.';
+}
+
+function buildSuggestedFeedback(crit, level, issue) {
+  var actionMap = {
+    incompleto: 'completa la parte faltante con información concreta del caso y evita respuestas de una sola frase',
+    generico: 'cambia ideas amplias por ejemplos, datos o descripciones específicas del caso trabajado',
+    desconexion: 'revisa si lo que presentas realmente responde al problema y al criterio evaluado',
+    falta_evidencia: 'agrega evidencia, ejemplos o detalles verificables que sostengan tu respuesta',
+    falta_justificar: 'explica por qué tomaste esa decisión y cómo se conecta con el análisis realizado',
+    error_parcial: 'corrige el punto que todavía afecta el resultado final para que todo quede coherente',
+    pulir: 'mejora la precisión del lenguaje y revisa detalles para que el trabajo quede más sólido',
+    profundizar: 'añade una capa más de análisis o sustento para que no solo cumpla, sino destaque',
+    sostener: 'mantén este nivel de claridad y coherencia en las siguientes entregas',
+    escalar: 'lleva este buen trabajo un paso más allá mostrando por qué funciona tan bien',
+    transferir: 'explica tu lógica para que otra persona entienda qué decisión tomaste y por qué',
+    refinar: 'revisa detalles finos de presentación, claridad o sustento para cerrar con más fuerza'
+  };
+  var openMap = {
+    inicio: 'Veo que ya empezaste a trabajar el criterio, y eso es valioso.',
+    proceso: 'Vas por buen camino y ya hay una base clara en tu trabajo.',
+    logrado: 'Cumples con lo esperado en este criterio y eso se nota.',
+    destacado: 'Tu trabajo está por encima de lo esperado y tiene elementos muy sólidos.'
+  };
+  var closeMap = {
+    inicio: 'Con ese ajuste vas a poder acercarte mucho más a Logrado.',
+    proceso: 'Con ese ajuste tu trabajo puede pasar de En desarrollo a Logrado.',
+    logrado: 'Con ese pequeño salto tu trabajo puede verse todavía más fuerte.',
+    destacado: 'Si haces ese refinamiento, tu trabajo no solo destacará más, también será más fácil de defender.'
+  };
+  return openMap[level] + ' En ' + crit.m + ', lo más importante ahora es que ' + actionMap[issue] + '. Recuerda que aquí esperamos que ' + crit.t.toLowerCase() + '. ' + closeMap[level];
+}
+
+function buildPrompt(crit, level, issue, draft, finalText) {
+  return 'Ayúdame a convertir este comentario docente en una retroalimentación más clara, accionable y amable para un estudiante de secundaria.\n\n' +
+    'Programa: Crack The Code\n' +
+    'Grado: ' + GRADE_LABELS[AI.grade] + '\n' +
+    'Criterio: ' + crit.m + '\n' +
+    'Lo esperado: ' + crit.t + '\n' +
+    'Nivel actual del estudiante: ' + LEVEL_LABELS[level] + '\n' +
+    'Problema principal observado: ' + getIssueLabel(level, issue) + '\n\n' +
+    (draft ? 'Mi borrador actual: ' + draft + '\n\n' : '') +
+    'Toma como referencia este feedback sugerido: ' + finalText + '\n\n' +
+    'Quiero una versión breve, específica, motivadora y sin tono duro. Máximo 5 oraciones.';
+}
+
+function getIssueLabel(level, issueId) {
+  var found = ISSUE_OPTIONS[level].find(function(x){ return x.id === issueId; });
+  return found ? found.label : issueId;
+}
+
+function shuffle(arr) {
+  var copy = arr.slice();
+  for (var i = copy.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = copy[i]; copy[i] = copy[j]; copy[j] = t;
+  }
+  return copy;
+}
+
+// ── SIMULATOR ────────────────────────────────────────────────────────────────
+var SIM = {
+  g9:  { ans:0, ok:0, picks:{} },
+  g10: { ans:0, ok:0, picks:{} },
+  g11: { ans:0, ok:0, picks:{} }
+};
+var SIM_TOTAL = 4;
+
+var FB = {
+  i: { y:'¡Correcto! Es 🔴 Inicio. Solo hay generalidades u opiniones sin evidencia. Sin datos concretos, sin a quién afecta específicamente, sin consecuencias reales.',
+       n:'Esta respuesta es 🔴 Inicio. Le falta todo lo que pide el criterio: especificidad, evidencia y consecuencias concretas. Solo hay intención u opinión general.' },
+  p: { y:'¡Correcto! Es 🟡 En desarrollo. Hay avance, pero la respuesta sigue siendo genérica — podría aplicar a cualquier grupo en cualquier contexto.',
+       n:'Esta respuesta es 🟡 En desarrollo. Hay algo, pero falta especificidad real del contexto propio del equipo para cumplir el criterio.' },
+  l: { y:'¡Correcto! Es 🟢 Logrado — la expectativa real. Específica para este contexto, coherente con el problema elegido, responde directamente al criterio. Eso es lo que esperamos de todos.',
+       n:'Esta respuesta es 🟢 Logrado, la expectativa real. Es específica para su contexto y responde directamente al criterio.' },
+  d: { y:'¡Correcto! Es 🔵 Destacado. El grupo fue más allá: incluyó datos propios, investigación adicional o tomó decisiones autónomas no pedidas explícitamente. Ese es el extra mile.',
+       n:'Esta respuesta es 🔵 Destacado. Agrega algo que nadie pidió: datos propios, investigación, validación con usuarios reales. Eso es lo que distingue Destacado de Logrado.' }
+};
+
+function setSimGrade(g, btn) {
+  document.querySelectorAll('.sim-grade').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('#sim-grade-pills .pill').forEach(b => b.classList.remove('on'));
+  document.getElementById('sim-' + g).classList.add('on');
+  btn.classList.add('on');
+}
+
+function pickOpt(el, g, ex) {
+  document.getElementById(g + '-' + ex + '-opts').querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  if (!SIM[g].picks[ex]) SIM[g].picks[ex] = {};
+  SIM[g].picks[ex].opt = el.querySelector('.opt-tag').textContent;
+  checkEnableSim(g, ex);
+}
+
+function pickLevel(el, g, ex, lv) {
+  el.parentElement.querySelectorAll('.lp').forEach(b => b.className = 'lp');
+  el.classList.add('p-' + lv);
+  if (!SIM[g].picks[ex]) SIM[g].picks[ex] = {};
+  SIM[g].picks[ex].level = lv;
+  checkEnableSim(g, ex);
+}
+
+function checkEnableSim(g, ex) {
+  var pk = SIM[g].picks[ex];
+  if (pk && pk.opt && pk.level) document.getElementById(g + '-' + ex + '-ck').disabled = false;
+}
+
+function checkSim(g, ex, correctLv) {
+  var pk = SIM[g].picks[ex];
+  if (!pk || !pk.level) return;
+  var isOk = pk.level === correctLv;
+  var msg = FB[correctLv][isOk ? 'y' : 'n'];
+
+  document.getElementById(g + '-' + ex + '-opts').classList.add('revealed');
+  var fbEl = document.getElementById(g + '-' + ex + '-fb');
+  fbEl.innerHTML = isOk
+    ? '<div class="fr-ok"><div class="fr-icon">✅</div><div class="fr-title">¡Correcto!</div><div class="fr-text">' + msg + '</div></div>'
+    : '<div class="fr-no"><div class="fr-icon">🔄</div><div class="fr-title">Casi — fíjate en esto</div><div class="fr-text">' + msg + '</div></div>';
+  fbEl.classList.add('show');
+  document.getElementById(g + '-' + ex + '-ck').disabled = true;
+
+  SIM[g].ans++;
+  if (isOk) SIM[g].ok++;
+  var pct = Math.round(SIM[g].ans / SIM_TOTAL * 100);
+  document.getElementById('pb-' + g).style.width = pct + '%';
+  document.getElementById('lbl-' + g).textContent = SIM[g].ans + ' / ' + SIM_TOTAL;
+  if (SIM[g].ans === SIM_TOTAL) {
+    var sc = document.getElementById('score-' + g);
+    sc.textContent = SIM[g].ok + '/' + SIM_TOTAL + ' correctos';
+    sc.classList.add('show');
+  }
+}
+
+function navSim(g, ex, dir) {
+  document.getElementById(g + '-e' + ex).style.display = 'none';
+  document.getElementById(g + '-e' + (ex + dir)).style.display = 'block';
+}
+
+// ── SIMPLE PRACTICE CASES ────────────────────────────────────────────────────
+var PRACTICE_CASES = {
+  g9: {
+    mission: '📋 Cap. 1 · Justificamos el problema',
+    gradeLabel: 'Grado 9',
+    question: 'El grupo explicó el problema, pero su justificación sigue muy general.',
+    work: '“Queremos resolver la pérdida de útiles en el colegio. Esto es importante porque pasa seguido y a muchos estudiantes les incomoda.”',
+    lookfor: 'Que el grupo diga a quién afecta el problema y qué consecuencia concreta genera.',
+    feedback: {
+      inicio: 'Su idea de problema aparece, pero todavía está muy general. Necesitan explicar mejor a quién afecta y qué pasa cuando ocurre este problema.',
+      proceso: 'Van por buen camino porque ya nombran el problema. Para subir a Logrado, agreguen una consecuencia concreta y expliquen mejor quiénes son los estudiantes afectados.',
+      logrado: 'La justificación ya muestra el problema con claridad. Para fortalecerla más, mantengan el foco en el público afectado y la consecuencia real que viven.',
+      destacado: 'Su justificación está muy bien sustentada: se entiende el problema, a quién afecta y su impacto. Sigan así y, si pueden, sumen un dato o ejemplo real para darle todavía más fuerza.'
+    }
+  },
+  g10: {
+    mission: '📋 Cap. 2 · Propuesta de valor de la web',
+    gradeLabel: 'Grado 10',
+    question: 'El grupo creó la web, pero todavía no se entiende bien por qué ese negocio es diferente.',
+    work: '“Nuestra página web muestra los productos, precios y contacto del emprendimiento. Queremos que más personas conozcan la marca.”',
+    lookfor: 'Que la web comunique con claridad qué hace diferente al emprendimiento y por qué alguien debería elegirlo.',
+    feedback: {
+      inicio: 'La web muestra información básica, pero todavía no comunica una propuesta de valor clara. Necesitan explicar mejor qué hace diferente al emprendimiento.',
+      proceso: 'Ya tienen una base útil en la web. Para subir de nivel, hagan más visible qué ofrece este negocio que otros no ofrecen y por qué eso importa al cliente.',
+      logrado: 'La web ya comunica bien la propuesta del negocio. Para seguir mejorando, asegúrense de que esa diferencia aparezca de forma clara desde el inicio de la página.',
+      destacado: 'La propuesta de valor está muy bien comunicada y ayuda a diferenciar el negocio. Sigan así y cuiden que toda la web mantenga ese mismo mensaje.'
+    }
+  },
+  g11: {
+    mission: '📋 Cap. 3 · Dashboard y análisis',
+    gradeLabel: 'Grado 11',
+    question: 'El grupo armó el dashboard, pero el análisis todavía describe datos sin interpretarlos.',
+    work: '“Vimos que una empresa tiene más seguidores y otra publica más seguido. Con eso concluimos que ambas tienen buena estrategia digital.”',
+    lookfor: 'Que no solo describan datos: también deben interpretar qué significan y cómo eso ayuda a su decisión de marketing.',
+    feedback: {
+      inicio: 'Ya reunieron información, pero el análisis todavía se queda en describir datos. Necesitan explicar qué significan esos datos para su estrategia.',
+      proceso: 'Van avanzando porque ya comparan información. Para subir a Logrado, interpreten los datos: expliquen qué conclusiones sacan y cómo eso orienta su campaña.',
+      logrado: 'El análisis ya interpreta datos y ayuda a tomar decisiones. Para fortalecerlo más, mantengan la conexión entre hallazgos y propuesta de marketing.',
+      destacado: 'El análisis es sólido porque interpreta bien los datos y los conecta con decisiones claras. Sigan así y, si quieren elevarlo aún más, prioricen los hallazgos más relevantes.'
+    }
+  }
+};
+
+var PRACTICE_STATE = { grade: 'g9', level: null };
+
+function renderPracticeCase() {
+  var data = PRACTICE_CASES[PRACTICE_STATE.grade];
+  if (!data) return;
+  document.getElementById('practice-mission').textContent = data.mission;
+  document.getElementById('practice-grade-label').textContent = data.gradeLabel;
+  document.getElementById('practice-question').textContent = data.question;
+  document.getElementById('practice-work').textContent = data.work;
+  document.getElementById('practice-lookfor').textContent = data.lookfor;
+  document.querySelectorAll('#practice-levels .lp').forEach(function(btn){ btn.classList.remove('on'); });
+  PRACTICE_STATE.level = null;
+  document.getElementById('practice-feedback-text').textContent = 'Elige un nivel para ver un ejemplo de feedback listo para usar.';
+}
+
+function setPracticeGrade(grade, btn) {
+  PRACTICE_STATE.grade = grade;
+  document.querySelectorAll('#practice-grade-pills .pill').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderPracticeCase();
+}
+
+function choosePracticeLevel(level, btn) {
+  PRACTICE_STATE.level = level;
+  document.querySelectorAll('#practice-levels .lp').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  var data = PRACTICE_CASES[PRACTICE_STATE.grade];
+  document.getElementById('practice-feedback-text').textContent = data.feedback[level];
+}
+
+</script>
+</body>
+</html>
