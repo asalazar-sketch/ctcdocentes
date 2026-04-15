@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CTC · Guía Docente 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#3ecfcf; --teal-d:#1fb0b0; --teal-l:#e8fafa; --teal-ll:#f2fdfd;
+  --g:#187b5b; --gd:#0f5f45; --gl:#eaf7f1; --gll:#f4fbf7;
+  --orange:#f4a261; --orange-l:#fff3ea;
+  --purple:#7b6bae; --purple-l:#f1effe;
+  --blue:#4a7fe0; --blue-l:#eef4ff;
+  --red:#c0392b; --red-l:#fdf2f1;
+  --amber:#b45309; --amber-l:#fffbeb;
+  --nl:#6b6b6b; --nl-l:#f2f2f2; /* no logrado */
+  --grade9:#7b6bae; --grade9-l:#f1effe;
+  --grade10:#4a7fe0; --grade10-l:#eef4ff;
+  --grade11:#1fb0b0; --grade11-l:#e8fafa;
+  --text:#12261c; --text2:#405a4d; --text3:#7e9e8d;
+  --border:#dce8e2; --bg:#f3f7f4; --white:#fff;
+  --r:18px; --r-sm:12px;
+  --shadow:0 2px 10px rgba(0,0,0,.05),0 10px 30px rgba(0,0,0,.05);
+  --font:'Nunito',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);background:radial-gradient(circle at top left,#f0fafa 0%,#f3f7f4 45%,#eef5f1 100%);color:var(--text);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:18px;background:rgba(24,123,91,.98);backdrop-filter:blur(8px);padding:0 18px;height:64px;box-shadow:0 2px 18px rgba(0,0,0,.18)}
+.brand{display:flex;align-items:center;gap:12px;min-width:210px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;flex-shrink:0}
+.brand-mark svg{width:18px;height:18px}
+.brand-name{font-weight:900;color:#fff;font-size:14px;letter-spacing:.02em}
+.tabs{display:flex;gap:4px;overflow:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{border:none;background:transparent;color:rgba(255,255,255,.72);font-weight:800;padding:12px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:.2s}
+.tab-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.tab-btn.active{background:#fff;color:var(--g)}
+
+/* LAYOUT */
+.page{display:none;max-width:1380px;margin:0 auto;padding:26px 22px 80px}
+.page.active{display:block}
+.two-col{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+.sidebar{position:sticky;top:88px;background:var(--white);border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.side-title{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);font-weight:800;margin:4px 0 12px}
+.side-btn{display:block;width:100%;border:none;background:transparent;border-left:3px solid transparent;padding:11px 12px;text-align:left;border-radius:10px;color:var(--text2);font-weight:700;cursor:pointer;transition:.18s}
+.side-btn:hover{background:var(--gll);color:var(--text)}
+.side-btn.active{background:var(--gl);color:var(--g);border-left-color:var(--g)}
+.content{min-width:0}
+.panel{display:none}.panel.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--g) 0%,#0d4f3a 100%);color:#fff;border-radius:26px;padding:34px 34px 28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:before,.hero:after{content:'';position:absolute;border-radius:999px;background:rgba(255,255,255,.08)}
+.hero:before{width:250px;height:250px;right:-70px;top:-90px}
+.hero:after{width:150px;height:150px;right:180px;bottom:-70px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.14);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px}
+.hero h1{margin:0 0 10px;font-size:38px;line-height:1.08;font-weight:900}
+.hero p{margin:0;color:rgba(255,255,255,.88);max-width:860px;line-height:1.7}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.hero-card{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:18px 18px 16px;backdrop-filter:blur(6px)}
+.hero-card .icon{font-size:24px;margin-bottom:8px;display:block}
+.hero-card h3{margin:0 0 6px;font-size:15px;font-weight:800}
+.hero-card p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)}
+
+/* MISC COMPONENTS */
+.section-intro{margin:22px 0 18px}
+.section-intro h2{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:900}
+.section-intro p{margin:0;color:var(--text3);line-height:1.7;max-width:1020px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow)}
+.card.pad{padding:24px}
+.callout{border-left:4px solid var(--g);background:var(--gll);padding:16px 18px;border-radius:0 14px 14px 0;color:var(--text2);line-height:1.65;margin:16px 0}
+.callout strong{display:block;color:var(--g);text-transform:uppercase;font-size:11px;letter-spacing:.08em;margin-bottom:4px}
+.callout.warn{background:var(--amber-l);border-left-color:var(--amber)}.callout.warn strong{color:var(--amber)}
+.callout.info{background:var(--blue-l);border-left-color:var(--blue)}.callout.info strong{color:var(--blue)}
+.callout.danger{background:var(--red-l);border-left-color:var(--red)}.callout.danger strong{color:var(--red)}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quick-card{padding:18px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,#fff 0%,#fbfdfb 100%)}
+.quick-card .num{width:34px;height:34px;border-radius:10px;background:var(--gl);display:grid;place-items:center;color:var(--g);font-weight:800;margin-bottom:10px}
+.quick-card h3{margin:0 0 6px;font-size:16px;font-weight:800}
+.quick-card p{margin:0;color:var(--text2);font-size:14px;line-height:1.65}
+.promo-banner{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--gl) 0%,#f7fbf8 100%);border:2px solid var(--g);border-radius:24px;padding:22px 24px;margin-top:18px}
+.promo-emoji{width:64px;height:64px;border-radius:18px;background:#fff;display:grid;place-items:center;font-size:28px;box-shadow:var(--shadow);flex-shrink:0}
+.promo-banner h3{margin:0 0 4px;font-size:23px;color:var(--g);font-weight:900}
+.promo-banner p{margin:0;color:var(--text2);line-height:1.6}
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.flow-item{padding:18px;background:#fff;border:1px solid var(--border);border-radius:18px;position:relative}
+.flow-item:not(:last-child):after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);background:var(--bg);color:var(--text3);padding:4px;z-index:2}
+.flow-item .icon{font-size:24px;display:block;margin-bottom:8px}
+.flow-item h4{margin:0 0 4px;font-size:14px;font-weight:800}
+.flow-item p{margin:0;color:var(--text3);font-size:12px;line-height:1.55}
+.accordion{display:flex;flex-direction:column;gap:10px}
+.accordion-item{border:1px solid var(--border);border-radius:18px;background:#fff;overflow:hidden}
+.acc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;cursor:pointer}
+.acc-head:hover{background:var(--gll)}
+.acc-left{display:flex;align-items:center;gap:14px}
+.acc-ico{width:40px;height:40px;border-radius:14px;background:var(--gl);display:grid;place-items:center;font-size:18px;color:var(--g)}
+.acc-head h4{margin:0;font-size:15px;font-weight:800}.acc-head p{margin:3px 0 0;color:var(--text3);font-size:12px}
+.acc-arrow{color:var(--text3);font-weight:800;transition:.2s}.accordion-item.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{display:none;padding:0 20px 18px 74px;color:var(--text2);line-height:1.7}.accordion-item.open .acc-body{display:block}
+.acc-body-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.mini-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px}.mini-card h5{margin:0 0 6px;font-size:13px;color:var(--text);font-weight:800}.mini-card p{margin:0;font-size:13px;color:var(--text2);line-height:1.55}
+.moment-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.moment-btn{border:2px solid var(--border);background:#fff;border-radius:16px;padding:16px;text-align:left;cursor:pointer;transition:.18s}
+.moment-btn.active{border-color:var(--g);background:var(--gl)}
+.moment-btn .tag{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:800;margin-bottom:5px}
+.moment-btn strong{display:block;font-size:14px;color:var(--text);font-weight:800}
+.moment-view{padding:24px;border:1px solid var(--border);border-radius:18px;background:#fff}
+.moment-view h3{margin:0 0 8px;font-size:20px;font-weight:900}.moment-view p{margin:0;color:var(--text2);line-height:1.75}
+.moment-points{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.moment-points .mini-card{background:linear-gradient(180deg,#fff 0%,#fbfdfb 100%)}
+.pill{border:2px solid var(--border);background:#fff;color:var(--text2);padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer;transition:.18s}
+.pill:hover{border-color:var(--g);color:var(--g)}
+.pill.active{border-color:var(--g);background:var(--g);color:#fff}.pill.soft.active{background:var(--gl);color:var(--g)}
+.grade-pill-9.active{border-color:var(--grade9);background:var(--grade9);color:#fff}
+.grade-pill-10.active{border-color:var(--grade10);background:var(--grade10);color:#fff}
+.grade-pill-11.active{border-color:var(--grade11);background:var(--grade11);color:#fff}
+.badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;background:var(--gl);color:var(--g);font-size:11px;font-weight:800}
+.ul-clean{padding-left:18px;color:var(--text2);line-height:1.75}.ul-clean li{margin-bottom:8px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}.kpi{padding:16px;border-radius:18px;background:#fff;border:1px solid var(--border)}.kpi span{display:block;color:var(--text3);font-size:12px;margin-bottom:4px}.kpi strong{font-size:18px;color:var(--text);font-weight:900}
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.project-card{border:1px solid var(--border);background:#fff;border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+.project-card .grade{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;margin-bottom:10px}
+.project-card h3{margin:0 0 8px;font-size:18px;font-weight:900}.project-card p{margin:0;color:var(--text2);line-height:1.65;font-size:14px}
+.project-card ul{margin:10px 0 0 18px;padding:0;color:var(--text2);line-height:1.65;font-size:13px}
+.grade9{background:var(--grade9-l);color:var(--grade9)}.grade10{background:var(--grade10-l);color:var(--grade10)}.grade11{background:var(--grade11-l);color:var(--grade11)}
+
+/* ===== RÚBRICAS: nuevo diseño con cajitas de grado ===== */
+.rubric-grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+.rubric-grade-box{border:3px solid var(--border);border-radius:24px;padding:22px 20px;background:#fff;cursor:pointer;transition:.22s;text-align:center;position:relative;overflow:hidden}
+.rubric-grade-box:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.1)}
+.rubric-grade-box.active-g9{border-color:var(--grade9);background:var(--grade9-l)}
+.rubric-grade-box.active-g10{border-color:var(--grade10);background:var(--grade10-l)}
+.rubric-grade-box.active-g11{border-color:var(--grade11);background:var(--grade11-l)}
+.rubric-grade-box .grade-emoji{font-size:36px;display:block;margin-bottom:10px}
+.rubric-grade-box h3{margin:0 0 4px;font-size:22px;font-weight:900}
+.rubric-grade-box p{margin:0;font-size:13px;color:var(--text2)}
+.rubric-grade-box .grade-tag{display:inline-block;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:12px}
+.chapters-section{display:none}
+.chapters-section.visible{display:block;animation:fadeIn .28s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chapters-title{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);font-weight:800;margin-bottom:12px}
+.chapter-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.chapter-card{border:2px solid var(--border);background:#fff;border-radius:20px;padding:18px 16px;cursor:pointer;transition:.2s;text-align:center}
+.chapter-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.chapter-card.ch-active{border-color:var(--active-color, var(--g));background:var(--active-bg, var(--gl))}
+.chapter-card .ch-icon{font-size:28px;display:block;margin-bottom:8px}
+.chapter-card h4{margin:0 0 4px;font-size:16px;font-weight:900}
+.chapter-card p{margin:0;font-size:12px;color:var(--text3)}
+.criteria-section{display:none}
+.criteria-section.visible{display:block;animation:fadeIn .25s ease}
+.criteria-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:14px 18px;background:var(--active-bg, var(--gl));border-radius:16px;border:2px solid var(--active-color, var(--g))}
+.criteria-header .ch-label{font-weight:900;font-size:16px;color:var(--active-color, var(--g))}
+.criteria-header p{margin:0;font-size:13px;color:var(--text2)}
+.criteria-cards{display:flex;flex-direction:column;gap:14px}
+.criteria-card-new{background:#fff;border:2px solid var(--border);border-radius:20px;padding:20px;position:relative;transition:.18s}
+.criteria-card-new:hover{border-color:var(--active-color, var(--g));box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.criteria-num{display:inline-flex;width:28px;height:28px;border-radius:8px;align-items:center;justify-content:center;font-weight:900;font-size:13px;margin-bottom:10px}
+.criteria-card-new h4{margin:0 0 8px;font-size:16px;font-weight:900}
+.criteria-card-new p{margin:0;color:var(--text2);font-size:14px;line-height:1.65}
+.no-logrado-note{margin-top:20px;background:#f8f8f8;border:2px dashed #ccc;border-radius:16px;padding:16px 18px}
+.no-logrado-note strong{display:block;margin-bottom:6px;color:var(--nl);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.no-logrado-note p{margin:0;color:var(--text2);line-height:1.65;font-size:14px}
+
+/* Levels grid */
+.levels-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
+.level-card{border-radius:18px;border:1px solid var(--border);overflow:hidden;background:#fff}
+.level-card .head{padding:12px 14px;font-weight:800;font-size:14px}
+.level-card .body{padding:14px;color:var(--text2);line-height:1.65;font-size:13px}
+.level-card .body ul{margin:10px 0 0 16px;padding:0}.level-card .body li{margin-bottom:6px}
+.level-nologrado .head{background:var(--nl-l);color:var(--nl)}
+.level-inicio .head{background:var(--red-l);color:var(--red)}
+.level-desarrollo .head{background:var(--amber-l);color:var(--amber)}
+.level-logrado .head{background:var(--gl);color:var(--g)}
+.level-destacado .head{background:var(--blue-l);color:var(--blue)}
+
+/* ===== PRÁCTICA: nuevo diseño ===== */
+.practice-top-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;align-items:center}
+.practice-top-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-right:4px}
+.practice-main-area{display:flex;flex-direction:column;gap:22px}
+.case-display{background:#fff;border:2px solid var(--teal);border-radius:22px;padding:24px;position:relative}
+.case-display .case-tag{display:inline-flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.case-display .case-badge{padding:5px 12px;border-radius:999px;font-size:11px;font-weight:800;background:var(--teal-l);color:var(--teal-d)}
+.case-display h3{margin:0 0 6px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+.case-display .case-text{margin:0;font-size:16px;line-height:1.75;color:var(--text);font-weight:600}
+.rubric-practice-shell{background:#fff;border:1px solid var(--border);border-radius:22px;overflow:hidden}
+.rubric-practice-header{padding:16px 22px;background:var(--gl);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.rubric-practice-header h3{margin:0;font-size:16px;font-weight:900;color:var(--g)}
+.rubric-practice-header p{margin:0;font-size:13px;color:var(--text2)}
+.criteria-practice-list{display:flex;flex-direction:column;gap:0}
+.criterion-practice-item{border-bottom:1px solid var(--border);padding:20px 22px}
+.criterion-practice-item:last-child{border-bottom:none}
+.cp-num-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cp-num{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:900;font-size:12px;flex-shrink:0}
+.cp-title{font-weight:900;font-size:15px}
+.cp-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:14px;padding-left:36px}
+.level-selector{display:flex;gap:8px;flex-wrap:wrap;padding-left:36px}
+.level-btn{border:2px solid var(--border);background:#fff;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:800;cursor:pointer;transition:.18s;white-space:nowrap}
+.level-btn:hover{transform:translateY(-1px)}
+.level-btn.sel-nologrado{border-color:var(--nl);background:var(--nl-l);color:var(--nl)}
+.level-btn.sel-inicio{border-color:var(--red);background:var(--red-l);color:var(--red)}
+.level-btn.sel-desarrollo{border-color:var(--amber);background:var(--amber-l);color:var(--amber)}
+.level-btn.sel-logrado{border-color:var(--g);background:var(--gl);color:var(--g)}
+.level-btn.sel-destacado{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.level-btn.unsel{border-color:var(--border);background:#fff;color:var(--text3)}
+.check-practice-btn{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#fff;border:none;border-radius:14px;padding:14px 28px;font-weight:900;font-size:15px;cursor:pointer;transition:.18s;margin-top:4px}
+.check-practice-btn:hover{background:var(--gd);transform:translateY(-1px)}
+.practice-result-panel{display:none;border-radius:20px;padding:22px;margin-top:8px}
+.practice-result-panel.show{display:block}
+.practice-result-panel.ok{background:var(--gl);border:2px solid #b9e2ca}
+.practice-result-panel.partial{background:var(--amber-l);border:2px solid #e8c874}
+.practice-result-panel.bad{background:var(--red-l);border:2px solid #f1b7b1}
+.practice-result-panel h4{margin:0 0 12px;font-size:18px;font-weight:900}
+.practice-result-panel .criterion-result{border-radius:12px;padding:12px 14px;margin-bottom:10px;background:rgba(255,255,255,.7)}
+.practice-result-panel .criterion-result:last-child{margin-bottom:0}
+.cr-label{font-weight:800;font-size:13px;margin-bottom:4px}
+.cr-expected{font-size:13px;color:var(--text2);margin-bottom:4px}
+.cr-feedback{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ===== FEEDBACK mejorado ===== */
+.feedback-shell{background:#fff;border:1px solid var(--border);border-radius:22px;overflow:hidden}
+.feedback-top{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--border);gap:16px}
+.feedback-top h3{margin:0;font-size:21px;font-weight:900}.feedback-top p{margin:4px 0 0;color:var(--text3);font-size:14px}
+.feedback-tabs{padding:16px 20px 0;display:flex;gap:10px}
+.feedback-view{display:none;padding:20px 20px 24px}.feedback-view.active{display:block}
+.tech-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}
+.tech-menu{display:flex;flex-direction:column;gap:10px}
+.tech-btn{border:2px solid var(--border);background:#fff;padding:16px;border-radius:18px;text-align:left;cursor:pointer;transition:.18s}
+.tech-btn.active{border-color:var(--g);background:var(--gl)}
+.tech-btn strong{display:block;font-size:15px;margin-bottom:3px;font-weight:800}.tech-btn span{font-size:13px;color:var(--text3)}
+.tech-panel{border:1px solid var(--border);background:linear-gradient(180deg,#fff 0%,#fbfdfb 100%);border-radius:18px;padding:22px}
+.tech-panel h4{margin:0 0 8px;font-size:22px;font-weight:900}.tech-panel p{margin:0 0 12px;color:var(--text2);line-height:1.7}
+.example-box{background:var(--gll);border-left:4px solid var(--g);padding:14px 16px;border-radius:0 14px 14px 0;color:var(--text2);line-height:1.7}
+.prompt-card{margin-top:16px;padding:16px;border:1px dashed #cfc9f9;background:var(--purple-l);border-radius:16px}.prompt-card code{display:block;white-space:pre-wrap;color:#4c3e87;font-family:var(--font);line-height:1.7}
+
+/* Feedback practice mejorado */
+.fb-practice-intro{background:var(--teal-l);border:2px solid var(--teal);border-radius:18px;padding:18px 20px;margin-bottom:20px}
+.fb-practice-intro h4{margin:0 0 6px;color:var(--teal-d);font-weight:900;font-size:16px}
+.fb-practice-intro p{margin:0;color:var(--text2);font-size:14px;line-height:1.65}
+.fb-cases-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.fb-case-card{border:2px solid var(--border);background:#fff;border-radius:18px;padding:18px 20px;cursor:pointer;transition:.2s}
+.fb-case-card:hover{border-color:var(--teal);transform:translateX(3px)}
+.fb-case-card.selected{border-color:var(--teal);background:var(--teal-l)}
+.fb-case-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.fb-case-label{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.fb-case-label.util{background:#e8faf4;color:#0f7a4a}
+.fb-case-label.regular{background:var(--amber-l);color:var(--amber)}
+.fb-case-label.mejorar{background:#fdf0e8;color:#c05000}
+.fb-case-num{font-weight:900;font-size:13px;color:var(--text3)}
+.fb-case-title{font-weight:800;font-size:14px;color:var(--text);margin-bottom:8px}
+.fb-case-comment{background:#f7f7f7;border-radius:12px;padding:12px 14px;font-size:14px;color:var(--text2);line-height:1.7;font-style:italic;border-left:3px solid var(--border)}
+.fb-case-comment.selected-comment{border-left-color:var(--teal)}
+.fb-eval-result{display:none;border-radius:18px;padding:20px;margin-top:4px}
+.fb-eval-result.show{display:block}
+.fb-eval-result.util{background:#e8faf4;border:2px solid #a8e6c8}
+.fb-eval-result.no-util{background:var(--red-l);border:2px solid #f1b7b1}
+.fb-eval-result h4{margin:0 0 10px;font-size:17px;font-weight:900}
+.fb-eval-result p{margin:0 0 10px;color:var(--text2);line-height:1.7;font-size:14px}
+.fb-eval-result p:last-child{margin-bottom:0}
+.fb-what-to-look{background:rgba(255,255,255,.7);border-radius:12px;padding:12px 14px;margin-top:10px}
+.fb-what-to-look strong{display:block;margin-bottom:4px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)}
+.fb-what-to-look p{margin:0;font-size:13px;line-height:1.6;color:var(--text2)}
+.try-btn{background:var(--g);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-weight:800;cursor:pointer;font-size:14px;margin-top:14px;transition:.18s}
+.try-btn:hover{background:var(--gd)}
+
+/* Misc */
+.option-list{display:flex;flex-direction:column;gap:10px}
+.eval-box{padding:18px;border-radius:18px;background:#fff;border:1px solid var(--border)}
+.eval-box h4{margin:0 0 8px;font-weight:900}.eval-box p{margin:0 0 10px;color:var(--text2);line-height:1.7}
+.grade-switch{display:flex;gap:10px;flex-wrap:wrap}
+
+@media(max-width:1100px){.two-col{grid-template-columns:1fr}.sidebar{position:static}.hero-grid,.quick-grid,.flow-grid,.moment-points,.kpi-row,.project-grid,.levels-grid{grid-template-columns:1fr 1fr}.moment-tabs{grid-template-columns:1fr 1fr}.rubric-grade-grid{grid-template-columns:1fr}.chapter-cards-grid{grid-template-columns:1fr}.tech-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.topbar{height:auto;flex-wrap:wrap;padding:12px 14px}.brand{min-width:auto}.page{padding:18px 14px 56px}.hero{padding:24px 20px}.hero h1{font-size:30px}.hero-grid,.quick-grid,.flow-grid,.moment-tabs,.moment-points,.kpi-row,.project-grid,.levels-grid{grid-template-columns:1fr}.flow-item:after{display:none}.promo-banner{flex-direction:column;align-items:flex-start}.rubric-grade-grid,.chapter-cards-grid{grid-template-columns:1fr}.level-selector{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#187b5b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </div>
+    <div class="brand-name">CTC · Guía Docente 2026</div>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="inicio">Inicio</button>
+    <button class="tab-btn" data-tab="curso">El curso</button>
+    <button class="tab-btn" data-tab="demoday">Demo Day</button>
+    <button class="tab-btn" data-tab="rubricas">Rúbricas</button>
+    <button class="tab-btn" data-tab="practica">Práctica</button>
+    <button class="tab-btn" data-tab="feedback">Feedback</button>
+  </nav>
+</header>
+
+<main>
+  <!-- INICIO -->
+  <section class="page active" id="page-inicio">
+    <div class="hero">
+      <div class="eyebrow">✨ Tu mapa docente para enseñar, evaluar y retroalimentar sin perderte</div>
+      <h1>Bienvenida a tu guía docente interactiva</h1>
+      <p>Esta página está hecha para que entiendas rápido la experiencia del curso, prepares bien el Demo Day, leas las rúbricas exactas por grado y practiques cómo evaluar y dar feedback útil con seguridad.</p>
+      <div class="hero-grid">
+        <div class="hero-card"><span class="icon">🍞</span><h3>La regla para adaptar</h3><p>Cuando dudes, vuelve a esto: <strong>bitácora + criterios de evaluación</strong>. Eso no se negocia.</p></div>
+        <div class="hero-card"><span class="icon">🚀</span><h3>Demo Day con sentido</h3><p>No es un cierre muerto: la retro de un capítulo se levanta en el siguiente, porque el proyecto va encadenado.</p></div>
+        <div class="hero-card"><span class="icon">📐</span><h3>Rúbricas exactas</h3><p>Diferenciadas por 9°, 10° y 11°, con niveles de logro visibles y criterios por capítulo.</p></div>
+      </div>
+    </div>
+    <div class="section-intro"><h2>Qué vas a encontrar aquí</h2><p>Una herramienta para tomar decisiones docentes más rápido: qué priorizar, qué mirar en cada capítulo, cómo leer una evidencia y cómo dar una retro que sí sirva para mejorar.</p></div>
+    <div class="quick-grid">
+      <div class="quick-card card"><div class="num">1</div><h3>Cómo es la experiencia</h3><p>Qué pasa realmente en una clase CTC y cómo se conecta todo con el proyecto final.</p></div>
+      <div class="quick-card card"><div class="num">2</div><h3>Qué evaluar</h3><p>Rúbricas exactas, niveles de logro y práctica para llegar al Demo Day con criterio.</p></div>
+      <div class="quick-card card"><div class="num">3</div><h3>Cómo retroalimentar</h3><p>Técnicas simples, ejercicios de juicio docente y prompts para apoyarte si quieres usar IA.</p></div>
+    </div>
+    <div class="promo-banner">
+      <div class="promo-emoji">🎯</div>
+      <div>
+        <h3>Tu regla para adaptar</h3>
+        <p><strong>Bitácora + criterios de evaluación = la clave del éxito.</strong> Si algo falla, si hay retrasos o si el tiempo no alcanza, eso es lo primero que debes proteger. No adaptes el sentido del proyecto: adapta el ritmo, el orden o el acompañamiento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL CURSO -->
+  <section class="page" id="page-curso">
+    <div class="two-col">
+      <aside class="sidebar">
+        <div class="side-title">El curso</div>
+        <button class="side-btn active" data-group="curso" data-panel="estructura">Estructura del curso</button>
+        <button class="side-btn" data-group="curso" data-panel="experiencia">Cómo es la experiencia</button>
+        <button class="side-btn" data-group="curso" data-panel="proyectos">Proyectos finales</button>
+        <button class="side-btn" data-group="curso" data-panel="bitacora">La bitácora</button>
+        <button class="side-btn" data-group="curso" data-panel="campus">Campus CTC</button>
+        <button class="side-btn" data-group="curso" data-panel="formula">La fórmula del éxito</button>
+      </aside>
+      <div class="content">
+        <div class="panel active" id="panel-estructura">
+          <div class="section-intro"><h2>Cómo está organizado el curso</h2><p>La lógica general para que siempre sepas dónde estás y qué priorizar.</p></div>
+          <div class="flow-grid">
+            <div class="flow-item card"><span class="icon">🏫</span><h4>Grado</h4><p>9, 10 u 11</p></div>
+            <div class="flow-item card"><span class="icon">📦</span><h4>Capítulo</h4><p>El módulo del proyecto</p></div>
+            <div class="flow-item card"><span class="icon">🎯</span><h4>Misión</h4><p>La clase o sesión</p></div>
+            <div class="flow-item card"><span class="icon">⚡</span><h4>Nivel</h4><p>Las actividades dentro de la misión</p></div>
+          </div>
+          <div class="callout"><strong>Cómo leerlo</strong>"Capítulo 2, Misión 3, Nivel 4" significa: segundo módulo, tercera clase y cuarta actividad dentro de esa clase. Es tu GPS dentro del curso.</div>
+          <div class="kpi-row">
+            <div class="kpi"><span>Grado 9</span><strong>App funcional</strong></div>
+            <div class="kpi"><span>Grado 10</span><strong>Página web</strong></div>
+            <div class="kpi"><span>Grado 11</span><strong>Campaña + dashboard</strong></div>
+            <div class="kpi"><span>Foco común</span><strong>Proyecto real</strong></div>
+          </div>
+        </div>
+        <div class="panel" id="panel-experiencia">
+          <div class="section-intro"><h2>Cómo es la experiencia</h2><p>Una clase CTC no es "ver diapositivas y avanzar tema". Es construir, probar, revisar y mejorar un proyecto real.</p></div>
+          <div class="quick-grid">
+            <div class="quick-card card"><div class="num">1</div><h3>Inicio</h3><p>Activas el objetivo de la misión, conectas con el capítulo y ubicas al grupo en qué van a producir hoy.</p></div>
+            <div class="quick-card card"><div class="num">2</div><h3>Desarrollo</h3><p>El grupo construye: investiga, diseña, programa, analiza, prueba o mejora según el reto del capítulo.</p></div>
+            <div class="quick-card card"><div class="num">3</div><h3>Cierre</h3><p>Se deja evidencia, se registra el avance y se clarifica qué sigue. El proyecto siempre se mueve hacia adelante.</p></div>
+          </div>
+          <div class="section-intro"><h2 style="font-size:22px">Elementos clave de la experiencia</h2><p>Estos tres no son "extras sin importancia". Ayudan a que el curso no se quede solo en cumplir lo mínimo.</p></div>
+          <div class="quick-grid">
+            <div class="quick-card card"><div class="num">⚡</div><h3>Reto Crack</h3><p>Empuja al grupo a elevar la calidad del proyecto. Si vas bien de tiempo, es de lo primero que deberías sumar.</p></div>
+            <div class="quick-card card"><div class="num">🚀</div><h3>Reto Tu Futuro</h3><p>Conecta lo que hacen en clase con habilidades para la vida, el trabajo y la toma de decisiones reales.</p></div>
+            <div class="quick-card card"><div class="num">🎯</div><h3>Punto de control</h3><p>Te permite revisar cómo van y tener evidencia intermedia del proceso, no solo del producto final.</p></div>
+          </div>
+          <div class="callout info"><strong>Ojo pedagógico</strong>Todo esto acompaña el proyecto. No son piezas aisladas: cada misión, cada evidencia y cada mejora empujan el mismo producto final del año.</div>
+        </div>
+        <div class="panel" id="panel-proyectos">
+          <div class="section-intro"><h2>Proyectos finales por grado</h2><p>No se trata solo de "hacer una app" o "hacer una web". Cada grado trabaja un tipo de solución distinta y por eso cambia lo que debemos observar.</p></div>
+          <div class="project-grid">
+            <div class="project-card"><span class="grade grade9">Grado 9</span><h3>App funcional</h3><p>Los estudiantes detectan una problemática real, definen a quién afecta y construyen una app que responda a esa necesidad.</p><ul><li>Problema claro y bien justificado</li><li>Flujo funcional de la app</li><li>Mejoras a partir de diagnóstico de uso</li></ul></div>
+            <div class="project-card"><span class="grade grade10">Grado 10</span><h3>Página web para un emprendimiento</h3><p>Los estudiantes trabajan con un negocio real o cercano, analizan su contexto y construyen una web que comunique mejor su propuesta.</p><ul><li>Comprensión del negocio y su cliente</li><li>Navegación y estructura clara</li><li>Mejoras a partir de feedback real</li></ul></div>
+            <div class="project-card"><span class="grade grade11">Grado 11</span><h3>Campaña basada en datos</h3><p>Los estudiantes levantan una idea de empresa, analizan competencia con datos y diseñan una campaña coherente con ese análisis.</p><ul><li>Base de datos pertinente</li><li>Dashboard o análisis útil</li><li>Decisiones de campaña sustentadas</li></ul></div>
+          </div>
+        </div>
+        <div class="panel" id="panel-bitacora">
+          <div class="section-intro"><h2>La bitácora</h2><p>Tu referencia central para acompañar, revisar y evaluar.</p></div>
+          <div class="card pad">
+            <ul class="ul-clean">
+              <li>La bitácora es el lugar donde el estudiante registra lo que el curso marca como evaluable.</li>
+              <li>No todo va en bitácora. Solo lo que la experiencia del curso indique como evidencia o producto esperado.</li>
+              <li>Revísala clase a clase para llegar al Demo Day con el proceso ya entendido.</li>
+              <li>Si algo no se puede terminar por tiempo o contexto, vuelve a esta pregunta: <strong>¿la bitácora y lo evaluable están protegidos?</strong></li>
+            </ul>
+          </div>
+          <div class="callout danger"><strong>Ojo</strong>La bitácora y la rúbrica están alineadas. Cuando evalúas, no estás inventando criterios: estás leyendo evidencias que el grupo debió construir y registrar a lo largo del capítulo.</div>
+        </div>
+        <div class="panel" id="panel-campus">
+          <div class="section-intro"><h2>Campus CTC</h2><p>Versión interactiva para ubicar rápido cada espacio, sin scroll eterno.</p></div>
+          <div class="accordion" id="campusAccordion">
+            <div class="accordion-item open"><div class="acc-head"><div class="acc-left"><div class="acc-ico">🎉</div><div><h4>Bienvenida y primeros pasos</h4><p>La entrada al curso y el propósito general</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body"><div class="acc-body-grid"><div class="mini-card"><h5>Video y activación</h5><p>Sirve para enganchar y explicar por qué el curso mezcla tecnología, negocio y solución de problemas reales.</p></div><div class="mini-card"><h5>Ruta del curso</h5><p>Ubica al grupo en el proyecto del año, capítulos, lógica de evaluación y sentido del proceso.</p></div></div></div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">⚡</div><div><h4>Zona Crack</h4><p>Recursos para dinamizar, reforzar o practicar</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body"><div class="acc-body-grid"><div class="mini-card"><h5>Retos flash</h5><p>Para activar energía, hacer pausas o cerrar con algo memorable.</p></div><div class="mini-card"><h5>Simulador y recursos extra</h5><p>Sirven para reforzar sin perder de vista lo principal.</p></div></div></div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">📦</div><div><h4>Capítulos</h4><p>Donde viven las misiones, foros y niveles</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body"><div class="acc-body-grid"><div class="mini-card"><h5>Foro del capítulo</h5><p>Espacio para activar discusión, reflexión o seguimiento.</p></div><div class="mini-card"><h5>Misiones y niveles</h5><p>Aquí ocurre la clase y se conecta con la bitácora y el proyecto final.</p></div></div></div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">🚀</div><div><h4>Demo Day</h4><p>La misión de evaluación de cada capítulo</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body"><div class="acc-body-grid"><div class="mini-card"><h5>Tarea de envío</h5><p>El estudiante solo marca la entrega. Lo central es que el producto ya esté disponible para revisar.</p></div><div class="mini-card"><h5>Retos autónomos</h5><p>Mientras evalúas, el grupo sigue avanzando y no se pierde tiempo de clase.</p></div></div></div></div>
+          </div>
+        </div>
+        <div class="panel" id="panel-formula">
+          <div class="section-intro"><h2>La fórmula del éxito</h2><p>Esta sección está pensada para resolver la gran duda docente: "¿Qué adapto y qué no adapto?"</p></div>
+          <div class="promo-banner"><div class="promo-emoji">🍞</div><div><h3>Cuando dudes, vuelve a esto</h3><p><strong>Bitácora + criterios de evaluación = la clave del éxito.</strong> Eso es lo que siempre debes proteger. Puedes ajustar tiempos, secuencias o formas de acompañar, pero no perder la evidencia central ni los criterios con los que leerás el avance.</p></div></div>
+          <div class="quick-grid" style="margin-top:18px;">
+            <div class="quick-card card"><div class="num">1</div><h3>Qué no adaptas</h3><p>El sentido del proyecto, las evidencias clave de bitácora y los criterios con los que vas a evaluar.</p></div>
+            <div class="quick-card card"><div class="num">2</div><h3>Qué sí puedes adaptar</h3><p>El ritmo, el orden de revisión, la forma de acompañar y cómo sostienes el avance si hay retrasos.</p></div>
+            <div class="quick-card card"><div class="num">3</div><h3>Qué haces si algo falla</h3><p>Vuelves a lo esencial: proteger evidencia, dejar claro el siguiente paso y registrar seguimiento.</p></div>
+          </div>
+          <div class="callout warn"><strong>Regla operativa</strong>Si tus estudiantes demoran en ingresar o se van antes del tiempo asignado, puedes aprovechar ese tiempo para evaluar proyectos. El Demo Day ocurre durante clase, y si no acabas en una sesión, debes avisar a Proyectos para continuar en la siguiente.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO DAY -->
+  <section class="page" id="page-demoday">
+    <div class="two-col">
+      <aside class="sidebar">
+        <div class="side-title">Demo Day</div>
+        <button class="side-btn active" data-group="demo" data-panel="demo-prep">Preparación previa</button>
+        <button class="side-btn" data-group="demo" data-panel="demo-momentos">Los momentos del Demo Day</button>
+        <button class="side-btn" data-group="demo" data-panel="demo-fallas">Si algo falla</button>
+      </aside>
+      <div class="content">
+        <div class="panel active" id="panel-demo-prep">
+          <div class="section-intro"><h2>Preparación del Demo Day</h2><p>Antes del cierre oficial, esto es lo que debes tener claro para que la evaluación sea ágil, justa y útil.</p></div>
+          <div class="accordion" id="prepAccordion">
+            <div class="accordion-item open"><div class="acc-head"><div class="acc-left"><div class="acc-ico">👀</div><div><h4>Revisa avances antes de ese día</h4><p>No llegues al Demo Day viendo la bitácora por primera vez</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body">Asómate clase a clase a la bitácora, abre links clave y detecta grupos con bajo avance antes del cierre oficial. Eso te permitirá evaluar con más criterio y menos improvisación.</div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">💬</div><div><h4>Deja comentarios previos</h4><p>La evaluación se vuelve más justa cuando hubo acompañamiento antes</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body">Puedes usar comentarios breves en el Google Doc para orientar mejoras antes de la nota final. Así, el Demo Day no cae como sorpresa.</div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">📐</div><div><h4>Lee la rúbrica antes</h4><p>Evalúa con foco, no improvisando en el momento</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body">Antes del Demo Day, elige el grado y capítulo para mirar los 3 criterios exactos que usarás. Evalúas mejor cuando sabes qué evidencia estás buscando.</div></div>
+            <div class="accordion-item"><div class="acc-head"><div class="acc-left"><div class="acc-ico">📣</div><div><h4>Anticipa al grupo</h4><p>Que sepan qué deben tener listo y cómo se hará el cierre</p></div></div><div class="acc-arrow">⌄</div></div><div class="acc-body">Una clase antes, recuerda qué evidencias deben estar completas y cómo funcionará la sesión de cierre. Eso baja ansiedad y ordena expectativas.</div></div>
+          </div>
+          <div class="callout info"><strong>Aclaración clave</strong>Cuando el profe CTC deja retro en un capítulo, no significa que todo deba corregirse dentro de esa misma clase. Lo importante es que esa retro se levante en el siguiente capítulo, porque todo el proyecto está encadenado.</div>
+        </div>
+        <div class="panel" id="panel-demo-momentos">
+          <div class="section-intro"><h2>Los momentos del Demo Day</h2><p>Haz clic en cada momento para ver qué foco debe tener.</p></div>
+          <div class="moment-tabs" id="momentTabs">
+            <button class="moment-btn active" data-moment="m0"><span class="tag">Antes</span><strong>Ubica y organiza</strong></button>
+            <button class="moment-btn" data-moment="m1"><span class="tag">Momento 1</span><strong>Abrir la dinámica</strong></button>
+            <button class="moment-btn" data-moment="m2"><span class="tag">Momento 2</span><strong>Evaluar mientras avanzan</strong></button>
+            <button class="moment-btn" data-moment="m3"><span class="tag">Momento 3</span><strong>Cerrar con foco</strong></button>
+            <button class="moment-btn" data-moment="m4"><span class="tag">Después</span><strong>Reportar y continuar</strong></button>
+          </div>
+          <div class="moment-view" id="momentView"></div>
+        </div>
+        <div class="panel" id="panel-demo-fallas">
+          <div class="section-intro"><h2>Si algo falla</h2><p>Una salida simple para los problemas más comunes, sin perder el foco pedagógico.</p></div>
+          <div class="quick-grid">
+            <div class="quick-card card"><div class="num">📅</div><h3>Cancelan la clase</h3><p>El Demo Day no desaparece: se reprograma y se avisa al grupo. Lo importante es no perder la evidencia ni el criterio de cierre.</p></div>
+            <div class="quick-card card"><div class="num">🔗</div><h3>El link no abre</h3><p>Evalúa lo que sí está en bitácora, deja nota y pide corrección para la siguiente clase. No improvises una nota global sin evidencia.</p></div>
+            <div class="quick-card card"><div class="num">⏱️</div><h3>No alcanza el tiempo</h3><p>Continúas la evaluación en la siguiente clase y avisas a Proyectos. Si el grupo entra tarde o sale antes, aprovecha esos minutos para revisar proyectos.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÚBRICAS: nuevo diseño 3 cajitas → 3 capítulos → 3 criterios -->
+  <section class="page" id="page-rubricas">
+    <div class="section-intro"><h2>Rúbricas por grado y capítulo</h2><p>Los niveles de logro aplican a todos los grados y capítulos — tenlos siempre a la vista. Luego selecciona el grado y el capítulo para ver los 3 criterios exactos de evaluación.</p></div>
+
+    <!-- Niveles de logro: PRIMERO porque aplican a todos -->
+    <div style="margin-bottom:28px">
+      <div class="chapters-title">🎯 Niveles de logro · aplican para todos los grados y capítulos</div>
+      <div class="levels-grid" id="levelsGrid"></div>
+    </div>
+
+    <!-- Proyecto Destacado -->
+    <div style="background:linear-gradient(135deg,#fffbea 0%,#fff8d6 100%);border:2px solid #f5c518;border-radius:22px;padding:20px 24px;margin-bottom:28px;display:flex;align-items:flex-start;gap:16px">
+      <div style="font-size:32px;flex-shrink:0">⭐</div>
+      <div>
+        <div style="font-weight:900;font-size:17px;color:#8a6a00;margin-bottom:6px">Proyecto Destacado · Reconocimiento especial (95–100)</div>
+        <p style="margin:0;color:#5a4a00;line-height:1.7;font-size:14px">Este reconocimiento <strong>no es un criterio de rúbrica</strong> — es para los grupos estrella que alcanzan un desempeño sobresaliente en todos sus criterios. Las condiciones exactas para marcar a un grupo como Destacado las encontrarás en el <strong>Campus CTC</strong>. Con acompañamiento constante, estos grupos deberían poder identificarse desde el Momento 2 del Demo Day.</p>
+      </div>
+    </div>
+
+    <!-- Paso 1: Grado -->
+    <div class="rubric-grade-grid" id="rubricGradeGrid">
+      <div class="rubric-grade-box" data-grade="9">
+        <span class="rubric-grade-box grade-tag" style="background:var(--grade9-l);color:var(--grade9)">Grado 9°</span>
+        <div class="rubric-grade-box grade-emoji">📱</div>
+        <h3 style="color:var(--grade9)">App funcional</h3>
+        <p>Problema real → diseño → mejora</p>
+      </div>
+      <div class="rubric-grade-box" data-grade="10">
+        <span class="rubric-grade-box grade-tag" style="background:var(--grade10-l);color:var(--grade10)">Grado 10°</span>
+        <div class="rubric-grade-box grade-emoji">🌐</div>
+        <h3 style="color:var(--grade10)">Página web</h3>
+        <p>Emprendimiento → web → optimización</p>
+      </div>
+      <div class="rubric-grade-box" data-grade="11">
+        <span class="rubric-grade-box grade-tag" style="background:var(--grade11-l);color:var(--grade11)">Grado 11°</span>
+        <div class="rubric-grade-box grade-emoji">📊</div>
+        <h3 style="color:var(--grade11)">Campaña + datos</h3>
+        <p>Empresa → dashboard → campaña</p>
+      </div>
+    </div>
+
+    <!-- Paso 2: Capítulos -->
+    <div class="chapters-section" id="chaptersSection">
+      <div class="chapters-title" id="chaptersTitle">📦 Selecciona el capítulo</div>
+      <div class="chapter-cards-grid" id="chapterCardsGrid"></div>
+    </div>
+
+    <!-- Paso 3: Criterios -->
+    <div class="criteria-section" id="criteriaSection">
+      <div class="criteria-header" id="criteriaHeader">
+        <div>
+          <div class="ch-label" id="criteriaHeaderLabel"></div>
+          <p id="criteriaHeaderSub"></p>
+        </div>
+      </div>
+      <div class="criteria-cards" id="criteriaCardsNew"></div>
+      <div class="no-logrado-note">
+        <strong>⚠️ No logrado · Caso especial</strong>
+        <p>Este nivel aplica <strong>únicamente cuando el grupo no presenta nada de lo solicitado</strong> — la evidencia no existe o está completamente vacía. Con acompañamiento constante durante el capítulo, este debería ser un caso puntual y no la norma. Si se repite, es señal de que el grupo necesita seguimiento diferenciado desde antes del Demo Day.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PRÁCTICA: nuevo diseño con rúbrica completa y selección por criterio -->
+  <section class="page" id="page-practica">
+    <div class="section-intro"><h2>Práctica de evaluación con rúbrica</h2><p>Lee el caso del grupo, revisa los 3 criterios de la rúbrica y selecciona el nivel de logro que corresponde a cada uno. Luego verifica tu lectura.</p></div>
+
+    <!-- Selector de grado y capítulo -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:20px">
+      <div class="practice-top-bar">
+        <span class="practice-top-label">Grado</span>
+        <div id="practiceGradesNew" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+        <span class="practice-top-label" style="margin-left:12px">Capítulo</span>
+        <div id="practiceChaptersNew" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+    </div>
+
+    <div class="practice-main-area">
+      <!-- El caso -->
+      <div class="case-display" id="practiceCaseNew">
+        <div class="case-tag" id="practiceCaseTags"></div>
+        <h3>Caso de un grupo</h3>
+        <p class="case-text" id="practiceCaseText"></p>
+      </div>
+
+      <!-- La rúbrica con selección por criterio -->
+      <div class="rubric-practice-shell">
+        <div class="rubric-practice-header">
+          <div>
+            <h3>📐 Rúbrica de evaluación</h3>
+            <p>Para cada criterio, selecciona el nivel de logro que ves en el caso</p>
+          </div>
+        </div>
+        <div class="criteria-practice-list" id="criteriaPracticeList"></div>
+      </div>
+
+      <div>
+        <button class="check-practice-btn" id="checkPracticeBtn">✅ Ver resultado de mi evaluación</button>
+      </div>
+
+      <div class="practice-result-panel" id="practiceResultPanel"></div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK: mejorado -->
+  <section class="page" id="page-feedback">
+    <div class="section-intro"><h2>Feedback efectivo</h2><p>Un buen feedback reconoce lo logrado, señala con precisión qué mejorar y deja un puente claro hacia el siguiente capítulo. Aquí aprendes las técnicas y practicas reconocerlo.</p></div>
+    <div class="feedback-shell">
+      <div class="feedback-top">
+        <div><h3>Retroalimentar mejor, sin enredarse</h3><p>Técnicas simples + práctica de juicio docente.</p></div>
+      </div>
+      <div class="feedback-tabs">
+        <button class="pill soft active" data-fbtab="teoria">¿Qué es el feedback?</button>
+        <button class="pill soft" data-fbtab="practica">Práctica de feedback</button>
+      </div>
+
+      <div class="feedback-view active" id="fb-teoria">
+        <div class="callout info"><strong>Qué es un buen feedback en CTC</strong>No solo dice si estuvo bien o mal. Reconoce un logro real, señala con precisión qué mejorar y deja una orientación clara para el siguiente capítulo, porque en CTC el proyecto siempre está encadenado.</div>
+        <div class="tech-grid"><div class="tech-menu" id="techMenu"></div><div class="tech-panel" id="techPanel"></div></div>
+        <div class="prompt-card"><strong style="display:block;margin-bottom:8px;color:#4c3e87;">💡 Si quieres apoyarte en IA después</strong><code>Ayúdame a convertir este comentario docente en una retroalimentación clara, accionable y motivadora para un estudiante de grado [X]. El criterio evaluado es [X]. El estudiante logró [Y], pero debe mejorar [Z].</code></div>
+      </div>
+
+      <div class="feedback-view" id="fb-practica">
+        <div class="fb-practice-intro">
+          <h4>🎯 ¿Cómo funciona esta práctica?</h4>
+          <p>Vas a leer un comentario docente. Tu tarea es decidir: <strong>¿este feedback orienta al estudiante o no?</strong> Elige tu respuesta y luego se revela el análisis. Un buen feedback <strong>reconoce, orienta y deja ruta clara hacia el siguiente capítulo</strong>.</p>
+        </div>
+        <div id="fbCaseDisplay"></div>
+        <div id="fbVoteArea" style="display:none"></div>
+        <div class="fb-eval-result" id="fbEvalResult"></div>
+        <button class="try-btn" id="fbTryAnother" style="display:none">Ver siguiente caso →</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ===== NAVEGACIÓN ===== */
+const pages = ['inicio','curso','demoday','rubricas','practica','feedback'];
+const tabButtons = document.querySelectorAll('.tab-btn');
+const pageEls = Object.fromEntries(pages.map(p => [p, document.getElementById('page-'+p)]));
+tabButtons.forEach(btn => btn.addEventListener('click', () => {
+  const target = btn.dataset.tab;
+  tabButtons.forEach(b => b.classList.toggle('active', b === btn));
+  pages.forEach(p => pageEls[p].classList.toggle('active', p === target));
+  window.scrollTo({top:0, behavior:'smooth'});
+}));
+
+function setupSidebar(group,pageId){
+  const buttons = document.querySelectorAll(`.side-btn[data-group="${group}"]`);
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll(`#${pageId} .panel`).forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-'+btn.dataset.panel).classList.add('active');
+  }));
+}
+setupSidebar('curso','page-curso');
+setupSidebar('demo','page-demoday');
+document.querySelectorAll('.accordion-item .acc-head').forEach(head => head.addEventListener('click', ()=> head.parentElement.classList.toggle('open')));
+
+/* ===== DEMO DAY MOMENTOS ===== */
+const momentData = {
+  m0:{title:'Antes del Demo Day · Ubica y organiza', text:'Confirma qué criterios usarás, qué grupos necesitan más atención y qué evidencias sí o sí deben estar disponibles. Si sabes que algunos estudiantes suelen entrar tarde o desconectarse antes, aprovecha esos vacíos para avanzar evaluación.', points:[['Lo clave','Llegar sabiendo qué mirar.'],['Evita','Abrir la rúbrica por primera vez durante la clase.'],['Tip útil','Usa tiempos muertos para revisar proyectos.']]},
+  m1:{title:'Momento 1 · Abrir la dinámica', text:'Explica cómo será la sesión, recuerda qué se evaluará y da el tiempo inicial para que el grupo marque el envío y se ubique en la actividad autónoma.', points:[['Lo clave','Asegúrate de que entiendan qué parte del trabajo mirarás hoy.'],['Evita','Perder mucho tiempo explicando otra vez todo el capítulo.'],['Frase útil','"Hoy cerramos este capítulo mirando estos 3 criterios."']]},
+  m2:{title:'Momento 2 · Evaluar mientras avanzan', text:'Mientras el grupo trabaja en sus niveles autónomos, tú revisas bitácora por bitácora con foco en los criterios del capítulo. El Demo Day ocurre durante la clase.', points:[['Lo clave','Evaluar solo lo que corresponde al criterio.'],['Evita','Mirar todo el proyecto como si fuera una nota global.'],['Frase útil','"Estoy observando esta evidencia porque se conecta con este criterio."']]},
+  m3:{title:'Momento 3 · Cerrar con foco', text:'Comparte 1 o 2 patrones generales: qué estuvo fuerte y qué debería mejorar el grupo en el próximo tramo. No todo debe corregirse en ese mismo rato.', points:[['Lo clave','Feedback breve y accionable.'],['Evita','Cerrar con comentarios vagos o puramente negativos.'],['Frase útil','"Para el siguiente capítulo, pongan ojo en..."']]},
+  m4:{title:'Después del Demo Day · Reportar y continuar', text:'La mejora que se detecta en un capítulo se levanta en el siguiente, porque el proyecto está encadenado. Si no terminaste de evaluar en una clase, avisa a Proyectos para continuar en la próxima.', points:[['Lo clave','Registrar seguimiento.'],['Evita','Suponer que todo quedó "cerrado" ese mismo día.'],['Frase útil','"Estos grupos requieren revisión adicional por..."']]}
+};
+const momentView = document.getElementById('momentView');
+function renderMoment(key){
+  const m = momentData[key];
+  momentView.innerHTML = `<h3>${m.title}</h3><p>${m.text}</p><div class="moment-points">${m.points.map(([a,b])=>`<div class="mini-card"><h5>${a}</h5><p>${b}</p></div>`).join('')}</div>`;
+  document.querySelectorAll('.moment-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.moment===key));
+}
+renderMoment('m0');
+document.querySelectorAll('.moment-btn').forEach(btn => btn.addEventListener('click', ()=> renderMoment(btn.dataset.moment)));
+
+/* ===== DATOS DE RÚBRICAS ===== */
+const rubricData = {
+  '9': {
+    color:'var(--grade9)', colorVal:'#7b6bae', badge:'var(--grade9-l)', label:'Grado 9 · App funcional',
+    chapters: {
+      'Capítulo 1': { icon:'🌱', sub:'Problema, público y propuesta', criteria:[
+        {title:'Misión 3: ¿Por qué una App?', desc:'Explica por qué el problema es importante con ejemplos reales, indicando a quién afecta y sus consecuencias.'},
+        {title:'Misión 4: Mini Canvas · Público', desc:'Identifica a quién va dirigida la app y en qué espacios o situaciones específicas se puede encontrar a ese público.'},
+        {title:'Misión 4: Mini Canvas · Coherencia', desc:'Los bloques Problema, Solución y Público del Mini Canvas son coherentes entre sí y la solución responde directamente al problema del público descrito.'}
+      ]},
+      'Capítulo 2': { icon:'🔧', sub:'Diseño, base de datos y pantallas', criteria:[
+        {title:'Misión 3: Flujo visual claro (UX)', desc:'El análisis del recorrido de la app distingue qué parte de la navegación es clara y qué parte puede confundir al usuario.'},
+        {title:'Misión 2: Crea tu base de datos', desc:'La base de datos tiene los campos que la app necesita para funcionar y cada campo tiene un propósito claro relacionado con el problema.'},
+        {title:'Misión 3: Diseña tus pantallas', desc:'La acción principal de la app se puede completar de inicio a fin sin interrupciones y las pantallas muestran contenido real del problema elegido.'}
+      ]},
+      'Capítulo 3': { icon:'🚀', sub:'Diagnóstico y mejora', criteria:[
+        {title:'Misión 1: Diagnóstico', desc:'El diagnóstico señala con precisión qué parte específica de la app no resuelve bien el problema o en qué punto el usuario se bloquea o se confunde.'},
+        {title:'Misión 1: Información útil en la app', desc:'La información presentada en la app es relevante y cumple una función clara para el usuario.'},
+        {title:'Misión 2: Mejora con sentido', desc:'La mejora implementada responde a un problema de uso concreto identificado y hay conexión directa entre lo que se detectó y lo que cambió en la app.'}
+      ]}
+    }
+  },
+  '10': {
+    color:'var(--grade10)', colorVal:'#4a7fe0', badge:'var(--grade10-l)', label:'Grado 10 · Página web',
+    chapters: {
+      'Capítulo 1': { icon:'🔍', sub:'Investigación y propuesta digital', criteria:[
+        {title:'Misión 1: Nace tu incubadora', desc:'La elección del emprendimiento está justificada con un argumento que conecta las características del negocio con una necesidad digital real, más allá de la preferencia personal.'},
+        {title:'Misión 4: Investigación de campo', desc:'Las tablas de observación y de competidores tienen información específica del negocio elegido que permite entender su entorno real y diferenciarlo de otros negocios similares.'},
+        {title:'Misión 5: FODA', desc:'La conclusión sobre para qué servirá la web surge de un hallazgo específico del FODA: hay conexión directa entre el análisis y la propuesta digital.'}
+      ]},
+      'Capítulo 2': { icon:'🌐', sub:'Construcción y estructura de la web', criteria:[
+        {title:'Misión 1: El plano maestro', desc:'El flujo diseñado permite al cliente del emprendimiento completar la acción principal y la justificación explica por qué ese recorrido tiene sentido para ese cliente específico.'},
+        {title:'Misión 2: Laboratorio de creación visual', desc:'La web tiene secciones con contenido real del emprendimiento y cada sección funciona sin errores al navegarla.'},
+        {title:'Misión 2: Secciones del negocio', desc:'La información clave del negocio (qué venden, precio y contacto) está presente y accesible en la web sin necesidad de buscar entre secciones.'}
+      ]},
+      'Capítulo 3': { icon:'⚡', sub:'Optimización y mejora técnica', criteria:[
+        {title:'Misión 1: Escape Room — El código oculto', desc:'La falla identificada en la web es concreta e impacta en la experiencia del cliente del emprendimiento.'},
+        {title:'Retro Crack: Feedback real', desc:'La mejora implementada responde a feedback recogido y hay conexión directa entre lo que dijeron y el cambio realizado en la web.'},
+        {title:'Misión 3: El hack de optimización final', desc:'Los cambios técnicos implementados con HTML, CSS o JS hacen que la experiencia del usuario en la web sea mejor que en la versión del Cap. 2.'}
+      ]}
+    }
+  },
+  '11': {
+    color:'var(--grade11)', colorVal:'#1fb0b0', badge:'var(--grade11-l)', label:'Grado 11 · Campaña + datos',
+    chapters: {
+      'Capítulo 1': { icon:'💡', sub:'Idea de negocio y propósito', criteria:[
+        {title:'Misión 1: Banco de ideas locas', desc:'Cada idea está justificada con un problema o necesidad real observada: las justificaciones son concretas y distintas entre sí.'},
+        {title:'Misión 2: Nuestra decisión final', desc:'Presenta la idea de negocio elegida y explica por qué responde a un problema real y vale la pena desarrollarla.'},
+        {title:'Misión 3: Propósito, nombre y lema', desc:'El propósito, el nombre comercial y el lema son coherentes entre sí y con la idea de negocio: los tres comunican la misma promesa.'}
+      ]},
+      'Capítulo 2': { icon:'📊', sub:'Datos, dashboard y decisiones', criteria:[
+        {title:'Misión 5: Base de datos', desc:'Selecciona una fuente de datos pertinente a la competencia de su negocio y presenta la información organizada para su análisis.'},
+        {title:'Misión 6: El dashboard habla', desc:'Las decisiones del negocio están argumentadas con datos del dashboard: la argumentación conecta cada decisión con evidencia específica del análisis.'},
+        {title:'Dashboard', desc:'Presenta un dashboard que permite identificar información clave de la competencia para entender el mercado.'}
+      ]},
+      'Capítulo 3': { icon:'📣', sub:'Campaña digital y estrategia', criteria:[
+        {title:'Misión 1: Definición final de la empresa', desc:'Presenta una propuesta de valor clara y diferenciada basada en el análisis de la competencia.'},
+        {title:'Misión 3 y 4: Contenidos y piezas', desc:'Presenta una campaña con contenidos y piezas coherentes con el objetivo, el público y el mensaje.'},
+        {title:'Misión 2: Estrategia de campaña digital', desc:'Las decisiones de la estrategia son coherentes entre sí (objetivo, público, mensaje y canales) y se sustentan en información del dashboard.'}
+      ]}
+    }
+  }
+};
+
+/* ===== NIVELES ===== */
+const levelCards = [
+  {cls:'level-nologrado', head:'No logrado', body:'El grupo no presenta la evidencia solicitada o está completamente vacía.', bullets:['No hay nada para evaluar.','Aplica solo cuando el trabajo no existe.','Si es frecuente, el grupo necesita seguimiento desde antes.']},
+  {cls:'level-inicio', head:'Inicio', body:'El estudiante está comenzando, pero la solución aún no responde claramente al problema.', bullets:['La entrega está incompleta o muy básica.','La solución no funciona o no se entiende.','No hay coherencia clara con el problema.']},
+  {cls:'level-desarrollo', head:'En desarrollo', body:'La solución avanza, pero aún tiene vacíos, errores o falta de claridad.', bullets:['La idea se entiende, pero no termina de cerrar.','Funciona parcialmente o con errores.','Requiere acompañamiento para mejorar.']},
+  {cls:'level-logrado', head:'Logrado', body:'La solución cumple con lo solicitado y responde adecuadamente al problema.', bullets:['Cumple todos los criterios del módulo.','La solución funciona correctamente.','Es coherente con el problema y los datos trabajados.']},
+  {cls:'level-destacado', head:'Destacado', body:'La solución va más allá de lo solicitado, mostrando autonomía y buenas decisiones.', bullets:['Incorpora mejoras adicionales dentro de la consigna.','Toma decisiones propias bien fundamentadas.']}
+];
+document.getElementById('levelsGrid').innerHTML = levelCards.map(l => `<div class="level-card ${l.cls}"><div class="head">${l.head}</div><div class="body">${l.body}<ul>${l.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div></div>`).join('');
+
+/* ===== RÚBRICAS: nueva interacción ===== */
+let activeRubricGrade = null;
+let activeRubricChapter = null;
+
+const rubricGradeGrid = document.getElementById('rubricGradeGrid');
+const chaptersSection = document.getElementById('chaptersSection');
+const chaptersTitle = document.getElementById('chaptersTitle');
+const chapterCardsGrid = document.getElementById('chapterCardsGrid');
+const criteriaSection = document.getElementById('criteriaSection');
+const criteriaHeader = document.getElementById('criteriaHeader');
+const criteriaHeaderLabel = document.getElementById('criteriaHeaderLabel');
+const criteriaHeaderSub = document.getElementById('criteriaHeaderSub');
+const criteriaCardsNew = document.getElementById('criteriaCardsNew');
+
+rubricGradeGrid.querySelectorAll('.rubric-grade-box').forEach(box => {
+  box.addEventListener('click', () => {
+    const g = box.dataset.grade;
+    activeRubricGrade = g;
+    activeRubricChapter = null;
+    // Update active state
+    rubricGradeGrid.querySelectorAll('.rubric-grade-box').forEach(b => {
+      b.classList.remove('active-g9','active-g10','active-g11');
+    });
+    box.classList.add(`active-g${g}`);
+    // Show chapters
+    const meta = rubricData[g];
+    chaptersTitle.textContent = `📦 Capítulos de Grado ${g}°`;
+    chapterCardsGrid.innerHTML = Object.entries(meta.chapters).map(([ch, data]) => `
+      <div class="chapter-card" data-ch="${ch}" style="--active-color:${meta.color};--active-bg:${meta.badge}">
+        <span class="ch-icon">${data.icon}</span>
+        <h4>${ch}</h4>
+        <p>${data.sub}</p>
+      </div>
+    `).join('');
+    chaptersSection.classList.add('visible');
+    criteriaSection.classList.remove('visible');
+    // Chapter click
+    chapterCardsGrid.querySelectorAll('.chapter-card').forEach(card => {
+      card.addEventListener('click', () => {
+        chapterCardsGrid.querySelectorAll('.chapter-card').forEach(c => c.classList.remove('ch-active'));
+        card.classList.add('ch-active');
+        activeRubricChapter = card.dataset.ch;
+        renderRubricCriteria(g, card.dataset.ch);
+      });
+    });
+  });
+});
+
+function renderRubricCriteria(grade, chapter) {
+  const meta = rubricData[grade];
+  const chData = meta.chapters[chapter];
+  criteriaHeaderLabel.textContent = `${chapter} · ${chData.sub}`;
+  criteriaHeaderLabel.style.color = meta.colorVal;
+  criteriaHeaderSub.textContent = `Grado ${grade}° · ${meta.label}`;
+  criteriaHeader.style.background = meta.badge;
+  criteriaHeader.style.borderColor = meta.colorVal;
+  criteriaCardsNew.innerHTML = chData.criteria.map((c, i) => `
+    <div class="criteria-card-new">
+      <div class="cp-num-row">
+        <div class="cp-num" style="background:${meta.badge};color:${meta.colorVal}">${i+1}</div>
+        <div class="cp-title">${c.title}</div>
+      </div>
+      <p style="margin:0 0 0 36px;color:var(--text2);font-size:14px;line-height:1.65">${c.desc}</p>
+    </div>
+  `).join('');
+  criteriaSection.classList.add('visible');
+  criteriaSection.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+/* ===== PRÁCTICA: nueva versión ===== */
+const practiceCases = {
+  '9': {
+    'Capítulo 1': {
+      case: 'El grupo eligió como problema "que muchos jóvenes no saben cómo manejar su tiempo". Justificaron con anécdotas propias y de compañeros. En su Mini Canvas escribieron: Problema: mala gestión del tiempo | Solución: una app con recordatorios y listas | Público: estudiantes de 14 a 18 años. La solución responde al problema y el público está bien delimitado.',
+      criteria: [
+        {title:'Misión 3: ¿Por qué una App?', desc:'Explica por qué el problema es importante con ejemplos reales, indicando a quién afecta y sus consecuencias.', correct:'En desarrollo', why:'Usan anécdotas propias pero no evidencia más concreta del impacto real. La justificación es válida pero puede fortalecerse.', feedback:'Ya tienen un problema claro. Para subirlo de nivel, expliquen qué consecuencias concretas tiene la mala gestión del tiempo en sus compañeros: ¿bajan sus notas? ¿No duermen bien? Eso hace el problema más sólido.'},
+        {title:'Misión 4: Mini Canvas · Público', desc:'Identifica a quién va dirigida la app y en qué espacios o situaciones específicas se puede encontrar a ese público.', correct:'Inicio', why:'Dicen "estudiantes de 14 a 18 años" pero no especifican en qué situaciones o espacios. Es demasiado amplio.', feedback:'El público está nombrado, pero no ubicado. ¿Cuándo exactamente usaría un estudiante esta app? ¿Antes de un examen, en casa, en receso? Eso hace que el diseño de la app sea mucho más específico.'},
+        {title:'Misión 4: Mini Canvas · Coherencia', desc:'Los bloques Problema, Solución y Público del Mini Canvas son coherentes entre sí y la solución responde directamente al problema del público descrito.', correct:'Logrado', why:'Los tres bloques sí se conectan: el problema es real para el público y la solución responde directamente.', feedback:'Su Mini Canvas tiene coherencia interna: el problema, la solución y el público se conectan bien. Eso es lo más importante en esta etapa.'}
+      ]
+    },
+    'Capítulo 2': {
+      case: 'El grupo diseñó un flujo de navegación para su app de gestión del tiempo. Hay una pantalla de inicio, una de tareas pendientes y otra de calendario. El flujo de inicio a fin se puede completar sin interrupciones. La base de datos tiene campos: id_tarea, nombre_tarea, fecha_vencimiento, estado_completado. Las pantallas muestran contenido real con nombres de materias del colegio.',
+      criteria: [
+        {title:'Misión 3: Flujo visual claro (UX)', desc:'El análisis del recorrido de la app distingue qué parte de la navegación es clara y qué parte puede confundir al usuario.', correct:'En desarrollo', why:'Describen el flujo pero no identifican qué parte podría confundir al usuario. Falta análisis crítico.', feedback:'El flujo existe y es coherente. Ahora hagan un paso más: ¿en qué punto un usuario nuevo podría perderse o confundirse? Detectar eso muestra que piensan como diseñadores, no solo como constructores.'},
+        {title:'Misión 2: Crea tu base de datos', desc:'La base de datos tiene los campos que la app necesita para funcionar y cada campo tiene un propósito claro relacionado con el problema.', correct:'Logrado', why:'Los campos son pertinentes y cada uno cumple una función clara para la funcionalidad de la app.', feedback:'Su base de datos está bien construida: los campos tienen sentido para lo que la app necesita hacer. Eso es lo que buscamos en este criterio.'},
+        {title:'Misión 3: Diseña tus pantallas', desc:'La acción principal de la app se puede completar de inicio a fin sin interrupciones y las pantallas muestran contenido real del problema elegido.', correct:'Logrado', why:'La acción principal se puede completar y el contenido es real y contextualizado.', feedback:'Las pantallas muestran contenido real y el flujo funciona de inicio a fin. Ese es exactamente el estándar que buscamos.'}
+      ]
+    },
+    'Capítulo 3': {
+      case: 'El grupo revisó su app y detectó que la pantalla de calendario no mostraba bien las tareas cuando había más de 5 al mismo tiempo. Documentaron el problema con capturas. La mejora que implementaron fue reorganizar cómo se muestran las tareas en esa vista. En la nueva versión se ven de forma ordenada por fecha.',
+      criteria: [
+        {title:'Misión 1: Diagnóstico', desc:'El diagnóstico señala con precisión qué parte específica de la app no resuelve bien el problema o en qué punto el usuario se bloquea o se confunde.', correct:'Logrado', why:'Identificaron el problema de forma precisa con evidencia visual. Eso es lo que pedimos.', feedback:'Su diagnóstico es puntual y tiene evidencia. Eso es exactamente lo que necesitamos en esta etapa: saber qué parte falla y por qué molesta al usuario.'},
+        {title:'Misión 1: Información útil en la app', desc:'La información presentada en la app es relevante y cumple una función clara para el usuario.', correct:'En desarrollo', why:'La información está presente pero algunas pantallas tienen datos que no necesariamente ayudan al usuario en el momento clave.', feedback:'Ya tienen información en la app, lo cual es un avance. Revisen si toda esa información es necesaria en ese momento o si hay datos que podrían aparecer en otro lugar para no sobrecargar al usuario.'},
+        {title:'Misión 2: Mejora con sentido', desc:'La mejora implementada responde a un problema de uso concreto identificado y hay conexión directa entre lo que se detectó y lo que cambió en la app.', correct:'Destacado', why:'La mejora responde exactamente al problema detectado y hay evidencia de los cambios. Además documentaron bien el antes y el después.', feedback:'Su mejora es un ejemplo claro de iteración con sentido: detectaron, documentaron y cambiaron algo específico. Eso muestra pensamiento de diseño maduro.'}
+      ]
+    }
+  },
+  '10': {
+    'Capítulo 1': {
+      case: 'El grupo eligió una heladería local para trabajar. Justificaron la elección porque "es un negocio que conocemos y nos gusta". En su investigación de campo llenaron tablas comparando 3 heladerías competidoras con precios, variedad de sabores y presencia en redes. Su FODA concluye que la web debería mostrar el menú de temporada y tener un sistema de pedidos.',
+      criteria: [
+        {title:'Misión 1: Nace tu incubadora', desc:'La elección del emprendimiento está justificada con un argumento que conecta las características del negocio con una necesidad digital real.', correct:'Inicio', why:'La justificación es puramente personal. No hay conexión con una necesidad digital del negocio.', feedback:'Eligieron un negocio que conocen, lo cual es un buen punto de partida. Ahora necesitan dar un paso más: ¿por qué ese negocio en particular necesita una web? ¿Qué problema digital tiene ahora mismo?'},
+        {title:'Misión 4: Investigación de campo', desc:'Las tablas de observación y de competidores tienen información específica del negocio elegido que permite entender su entorno real.', correct:'Logrado', why:'Las tablas tienen información real y específica que permite comparar y entender el mercado.', feedback:'Su investigación de campo es sólida: compararon competidores con datos concretos. Eso les da información útil para tomar decisiones en los próximos capítulos.'},
+        {title:'Misión 5: FODA', desc:'La conclusión sobre para qué servirá la web surge de un hallazgo específico del FODA.', correct:'En desarrollo', why:'Las conclusiones están conectadas al FODA pero de forma general. Falta precisar de qué hallazgo específico surge cada propuesta.', feedback:'Su FODA tiene conclusiones relevantes. Para subirlo de nivel, expliciten cuál dato del FODA les llevó a cada decisión: "como detectamos que no tienen presencia digital, entonces la web debería...".'}
+      ]
+    },
+    'Capítulo 2': {
+      case: 'La web del grupo tiene 4 secciones: Inicio, Menú, Nosotros y Contacto. Cada sección carga sin errores. El menú muestra fotos e información de sabores de temporada. El precio aparece en la sección Menú pero no en el inicio. Para contactar, hay que ir hasta la última sección.',
+      criteria: [
+        {title:'Misión 1: El plano maestro', desc:'El flujo diseñado permite al cliente del emprendimiento completar la acción principal y la justificación explica por qué ese recorrido tiene sentido.', correct:'En desarrollo', why:'El flujo existe pero no está bien justificado por qué ese recorrido tiene sentido para el cliente específico de una heladería.', feedback:'Tienen un flujo funcional. Ahora justifiquen las decisiones: ¿por qué pusieron Nosotros antes que Contacto? ¿El cliente de una heladería busca eso primero? Pensar en el cliente hace que el diseño sea mucho más estratégico.'},
+        {title:'Misión 2: Laboratorio de creación visual', desc:'La web tiene secciones con contenido real del emprendimiento y cada sección funciona sin errores al navegarla.', correct:'Logrado', why:'Las secciones tienen contenido real del negocio y funcionan correctamente.', feedback:'Su web tiene contenido real y funciona bien. Eso es exactamente lo que se espera en este capítulo.'},
+        {title:'Misión 2: Secciones del negocio', desc:'La información clave del negocio (qué venden, precio y contacto) está presente y accesible sin necesidad de buscar entre secciones.', correct:'Inicio', why:'El precio y el contacto no están accesibles de forma inmediata. El cliente tiene que buscar para encontrarlos.', feedback:'La información está en la web, pero el cliente tiene que ir hasta el final para contactar y encontrar precios. Para una heladería, esos datos son clave desde el primer vistazo. Consideren ponerlos más visibles.'}
+      ]
+    },
+    'Capítulo 3': {
+      case: 'En el Escape Room, el grupo identificó que el formulario de contacto de su web no enviaba los mensajes porque el botón tenía un error en el código. Recibieron feedback de una compañera que dijo "no entendí qué venden exactamente". Implementaron una frase más clara en el inicio. Además, cambiaron el color del menú de navegación con CSS para que contraste mejor.',
+      criteria: [
+        {title:'Misión 1: Escape Room — El código oculto', desc:'La falla identificada en la web es concreta e impacta en la experiencia del cliente del emprendimiento.', correct:'Logrado', why:'La falla identificada es concreta y tiene impacto directo en la experiencia del cliente.', feedback:'Detectaron una falla real con impacto en el cliente: un formulario que no funciona es crítico para un negocio. Buen trabajo de diagnóstico.'},
+        {title:'Retro Crack: Feedback real', desc:'La mejora implementada responde a feedback recogido y hay conexión directa entre lo que dijeron y el cambio realizado en la web.', correct:'Logrado', why:'Recibieron un comentario específico y lo convirtieron en un cambio concreto en la web.', feedback:'Su mejora es un ejemplo claro de cómo usar el feedback: escucharon un problema real y lo resolvieron con un cambio específico.'},
+        {title:'Misión 3: El hack de optimización final', desc:'Los cambios técnicos hacen que la experiencia del usuario en la web sea mejor que en la versión del Cap. 2.', correct:'En desarrollo', why:'El cambio de color es un ajuste visual válido pero no se evidencia claramente que la experiencia general mejoró.', feedback:'Hicieron cambios técnicos, pero para este criterio necesitan mostrar que la experiencia del usuario mejoró. ¿Cómo verificaron que el nuevo contraste ayuda? ¿Probaron con alguien? Un pequeño test de usuario puede hacer la diferencia.'}
+      ]
+    }
+  },
+  '11': {
+    'Capítulo 1': {
+      case: 'El grupo propuso 4 ideas: una app de delivery de comida casera, una plataforma de tutorías, un servicio de organización de eventos y una tienda de artesanías locales. Cada una tiene una justificación de 2-3 líneas con un problema diferente. Eligieron la plataforma de tutorías porque "es lo que más nos apasiona". El propósito que escribieron es "conectar estudiantes con conocimiento", el nombre es "SaberMás" y el lema es "Aprende sin límites".',
+      criteria: [
+        {title:'Misión 1: Banco de ideas locas', desc:'Cada idea está justificada con un problema o necesidad real observada: las justificaciones son concretas y distintas entre sí.', correct:'En desarrollo', why:'Tienen 4 ideas pero las justificaciones son genéricas y cortas. No todas muestran observación de un problema real.', feedback:'Ya tienen variedad de ideas, lo cual es positivo. Para subir este criterio, profundicen en cada justificación: ¿cómo observaron ese problema? ¿A quién le pasa? Eso hace que las ideas se sientan más fundadas en realidad.'},
+        {title:'Misión 2: Nuestra decisión final', desc:'Presenta la idea de negocio elegida y explica por qué responde a un problema real y vale la pena desarrollarla.', correct:'Inicio', why:'La justificación de la elección es personal ("nos apasiona") y no conecta con un problema real.', feedback:'Eligieron una idea, que es el paso inicial. Ahora necesitan justificar la elección con argumento externo a ustedes: ¿qué problema real resuelve SaberMás? ¿Por qué ese problema vale la pena atacar ahora?'},
+        {title:'Misión 3: Propósito, nombre y lema', desc:'El propósito, el nombre comercial y el lema son coherentes entre sí y con la idea de negocio.', correct:'Logrado', why:'Los tres elementos comunican la misma promesa y se alinean con la idea del negocio.', feedback:'Su propósito, nombre y lema son coherentes: todos hablan de aprender y conectar. Eso hace que la identidad del negocio se sienta sólida desde el inicio.'}
+      ]
+    },
+    'Capítulo 2': {
+      case: 'El grupo descargó datos de plataformas educativas de Latinoamérica de una fuente pública. Construyeron un dashboard con gráficos de barras que muestra precio promedio por plataforma, materias más demandadas y países con mayor crecimiento. Argumentaron que "como en Colombia hay mucha demanda de tutorías de matemáticas, nuestro precio debería ser competitivo" y que "apuntaremos a usuarios de 15 a 25 años porque es el segmento más activo en el dashboard".',
+      criteria: [
+        {title:'Misión 5: Base de datos', desc:'Selecciona una fuente de datos pertinente a la competencia de su negocio y presenta la información organizada para su análisis.', correct:'Logrado', why:'La fuente es pertinente, los datos son reales y están organizados para su análisis.', feedback:'Su base de datos es pertinente y está bien organizada. Eso les da una base sólida para argumentar decisiones con evidencia.'},
+        {title:'Misión 6: El dashboard habla', desc:'Las decisiones del negocio están argumentadas con datos del dashboard: la argumentación conecta cada decisión con evidencia específica del análisis.', correct:'Logrado', why:'Conectan decisiones específicas con hallazgos del dashboard. La argumentación es clara y tiene evidencia.', feedback:'Sus argumentos están conectados a datos reales del dashboard. Eso es exactamente el nivel de análisis que se busca en este capítulo.'},
+        {title:'Dashboard', desc:'Presenta un dashboard que permite identificar información clave de la competencia para entender el mercado.', correct:'Destacado', why:'El dashboard muestra múltiples dimensiones del mercado de forma clara y permite tomar decisiones informadas.', feedback:'Su dashboard va más allá de mostrar un solo dato: permite comparar precios, demanda y geografía. Eso muestra una lectura estratégica del mercado que es difícil de lograr en este capítulo.'}
+      ]
+    },
+    'Capítulo 3': {
+      case: 'La propuesta de valor existe, pero todavía no se siente claramente diferenciada de la competencia analizada. La campaña muestra piezas coherentes con el público y el mensaje, y la grilla se ve alineada con el objetivo de comunicación. Las decisiones de objetivo, público, mensaje y canales están integradas y cada una se sustenta en información proveniente del dashboard.',
+      criteria: [
+        {title:'Misión 1: Definición final de la empresa', desc:'Presenta una propuesta de valor clara y diferenciada basada en el análisis de la competencia.', correct:'En desarrollo', why:'La dirección está planteada, pero aún necesita una diferenciación más nítida frente a la competencia.', feedback:'Ya tienen una propuesta de valor inicial. Para fortalecer este criterio, expliquen mejor qué hace diferente a su empresa frente a la competencia y por qué eso sería importante para el cliente.'},
+        {title:'Misión 3 y 4: Contenidos y piezas', desc:'Presenta una campaña con contenidos y piezas coherentes con el objetivo, el público y el mensaje.', correct:'Logrado', why:'Hay una relación clara entre piezas, mensaje, canal y público.', feedback:'Este criterio está bien logrado porque las piezas y contenidos guardan coherencia con el objetivo, el público y el mensaje. Eso hace que la campaña se sienta estratégica y no solo decorativa.'},
+        {title:'Misión 2: Estrategia de campaña digital', desc:'Las decisiones de la estrategia son coherentes entre sí (objetivo, público, mensaje y canales) y se sustentan en información del dashboard.', correct:'Destacado', why:'La estrategia muestra coherencia interna y sustento real en datos.', feedback:'Su estrategia se destaca porque todas las decisiones están alineadas entre sí y se apoyan en evidencia del dashboard. Eso muestra una lectura estratégica madura y bien fundamentada.'}
+      ]
+    }
+  }
+};
+
+/* Estado práctica */
+let practiceState = { grade:'9', chapter:'Capítulo 1', selections:{} };
+const practiceGradesEl = document.getElementById('practiceGradesNew');
+const practiceChaptersEl = document.getElementById('practiceChaptersNew');
+const practiceCaseTags = document.getElementById('practiceCaseTags');
+const practiceCaseText = document.getElementById('practiceCaseText');
+const criteriaPracticeList = document.getElementById('criteriaPracticeList');
+const checkPracticeBtn = document.getElementById('checkPracticeBtn');
+const practiceResultPanel = document.getElementById('practiceResultPanel');
+
+const levelOptions = [
+  {key:'nologrado', label:'⬛ No logrado'},
+  {key:'inicio', label:'🔴 Inicio'},
+  {key:'desarrollo', label:'🟡 En desarrollo'},
+  {key:'logrado', label:'🟢 Logrado'},
+  {key:'destacado', label:'🔵 Destacado'}
+];
+const levelKeyToCorrect = {
+  'nologrado':'No logrado','inicio':'Inicio','desarrollo':'En desarrollo','logrado':'Logrado','destacado':'Destacado'
+};
+
+function renderPracticeNew(){
+  practiceState.selections = {};
+  practiceResultPanel.className = 'practice-result-panel';
+  practiceResultPanel.innerHTML = '';
+  // Grade pills
+  practiceGradesEl.innerHTML = ['9','10','11'].map(g => `<button class="pill grade-pill-${g} ${practiceState.grade===g?'active':''}" data-g="${g}">Grado ${g}</button>`).join('');
+  practiceGradesEl.querySelectorAll('button').forEach(b => b.addEventListener('click', ()=>{practiceState.grade=b.dataset.g;practiceState.chapter='Capítulo 1';renderPracticeNew();}));
+  // Chapter pills
+  const chapters = Object.keys(rubricData[practiceState.grade].chapters);
+  if(!chapters.includes(practiceState.chapter)) practiceState.chapter = chapters[0];
+  practiceChaptersEl.innerHTML = chapters.map(ch => `<button class="pill soft ${ch===practiceState.chapter?'active':''}" data-ch="${ch}">${ch}</button>`).join('');
+  practiceChaptersEl.querySelectorAll('button').forEach(b => b.addEventListener('click', ()=>{practiceState.chapter=b.dataset.ch;renderPracticeNew();}));
+  // Case
+  const caseData = practiceCases[practiceState.grade][practiceState.chapter];
+  const meta = rubricData[practiceState.grade];
+  practiceCaseTags.innerHTML = `<span class="case-badge">Grado ${practiceState.grade}°</span><span class="case-badge">${practiceState.chapter}</span>`;
+  practiceCaseText.textContent = caseData.case;
+  // Criteria with level selectors
+  criteriaPracticeList.innerHTML = caseData.criteria.map((c, i) => `
+    <div class="criterion-practice-item">
+      <div class="cp-num-row">
+        <div class="cp-num" style="background:${meta.badge};color:${meta.colorVal}">${i+1}</div>
+        <div class="cp-title">${c.title}</div>
+      </div>
+      <p class="cp-desc">${c.desc}</p>
+      <div class="level-selector" id="levelSel-${i}">
+        ${levelOptions.map(l => `<button class="level-btn unsel" data-ci="${i}" data-level="${l.key}">${l.label}</button>`).join('')}
+      </div>
+    </div>
+  `).join('');
+  // Level button clicks
+  criteriaPracticeList.querySelectorAll('.level-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ci = Number(btn.dataset.ci);
+      const level = btn.dataset.level;
+      practiceState.selections[ci] = level;
+      // Update visuals for this criterion
+      document.querySelectorAll(`#levelSel-${ci} .level-btn`).forEach(b => {
+        b.className = `level-btn ${b.dataset.level===level ? 'sel-'+level : 'unsel'}`;
+      });
+    });
+  });
+}
+
+checkPracticeBtn.addEventListener('click', () => {
+  const caseData = practiceCases[practiceState.grade][practiceState.chapter];
+  const total = caseData.criteria.length;
+  const selected = Object.keys(practiceState.selections).length;
+  if(selected < total){
+    practiceResultPanel.className = 'practice-result-panel show partial';
+    practiceResultPanel.innerHTML = `<h4>⚠️ Selecciona un nivel para los ${total} criterios</h4><p>Faltan ${total - selected} criterio(s) por calificar. Revisa cada uno antes de ver el resultado.</p>`;
+    return;
+  }
+  let correctCount = 0;
+  const resultsHtml = caseData.criteria.map((c, i) => {
+    const sel = practiceState.selections[i];
+    const selLabel = levelKeyToCorrect[sel];
+    const isOk = selLabel === c.correct;
+    if(isOk) correctCount++;
+    return `<div class="criterion-result">
+      <div class="cr-label" style="color:${isOk?'var(--g)':'var(--red)'}">${isOk?'✅':'🟡'} Criterio ${i+1}: ${c.title}</div>
+      <div class="cr-expected">Tu respuesta: <strong>${selLabel}</strong> · Esperado: <strong>${c.correct}</strong></div>
+      <div class="cr-feedback">${c.why} <em>${c.feedback}</em></div>
+    </div>`;
+  }).join('');
+  const allOk = correctCount === total;
+  const someOk = correctCount > 0;
+  practiceResultPanel.className = `practice-result-panel show ${allOk?'ok':someOk?'partial':'bad'}`;
+  practiceResultPanel.innerHTML = `
+    <h4>${allOk?'✅ Excelente lectura docente 🎉':someOk?`🟡 Vas bien — ${correctCount} de ${total} criterios acertados`:'🔴 Revisa tu lectura de los criterios'}</h4>
+    ${resultsHtml}
+    <p style="margin-top:12px"><strong>Recuerda:</strong> no se trata de acertar exacto — se trata de afinar tu mirada docente. Cada criterio es una pregunta específica sobre la evidencia.</p>
+  `;
+  practiceResultPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+
+renderPracticeNew();
+
+/* ===== FEEDBACK: técnicas ===== */
+const techData = {
+  sandwich:{name:'🥪 Técnica del sándwich', short:'Positivo → mejora → cierre motivador', body:'Empieza destacando algo que sí funcionó, luego señala con claridad qué debe mejorar y termina con un cierre que motive a seguir avanzando. Funciona bien cuando el grupo tiene un avance real pero necesita orientación.', example:'"La estructura de la web ya permite entender bien el negocio. Para fortalecerla más, revisen la navegación entre secciones para que el usuario no se pierda. Van bien encaminados y con esos ajustes su página se verá mucho más sólida."'},
+  semaforo:{name:'🚦 Técnica del semáforo', short:'Verde, amarillo y rojo para ubicar avances', body:'Organiza el feedback visualmente: qué está bien (verde), qué está en proceso (amarillo) y qué necesita atención urgente (rojo). Es muy útil cuando hay varios grupos y quieres dar retro rápida y ordenada.', example:'"🟢 Muy bien: ya se entiende el objetivo de la página. 🟡 En proceso: el mensaje principal todavía puede ser más directo. 🔴 A mejorar: revisen enlaces y botones que aún no funcionan."'},
+  rec:{name:'🔄 Técnica R.E.C.', short:'Reconocer → Explicar → Corregir', body:'Primero reconoces el esfuerzo o logro, luego explicas con precisión qué detectaste y finalmente propones una alternativa concreta para mejorar. Es ideal para feedback individual o cuando hay algo puntual que corregir.', example:'"Reconozco que avanzaron bastante en la construcción de la web. Lo que detecto es que la propuesta de valor aún no se diferencia con claridad. Les propongo añadir una frase central que explique qué hace única su propuesta."'}
+};
+const techMenu = document.getElementById('techMenu');
+const techPanel = document.getElementById('techPanel');
+let activeTech = 'sandwich';
+function renderTech(){
+  techMenu.innerHTML = Object.entries(techData).map(([key,val]) => `<button class="tech-btn ${activeTech===key?'active':''}" data-tech="${key}"><strong>${val.name}</strong><span>${val.short}</span></button>`).join('');
+  const t = techData[activeTech];
+  techPanel.innerHTML = `<h4>${t.name}</h4><p>${t.body}</p><div class="example-box"><strong style="display:block;margin-bottom:6px;color:var(--g)">Ejemplo real</strong>${t.example}</div>`;
+  techMenu.querySelectorAll('button').forEach(b => b.addEventListener('click', ()=>{activeTech=b.dataset.tech;renderTech();}));
+}
+renderTech();
+
+/* ===== FEEDBACK: práctica mejorada ===== */
+const feedbackCases = [
+  {num:1, title:'El comentario más corto del mundo', comment:'"Está bien, pero puede mejorar."', isUseful:false, why:'Es demasiado vago. El estudiante no sabe qué logró ni qué debería hacer diferente. Puede sonar neutro, pero no orienta el siguiente paso.', whatToLook:'Un buen feedback nombra algo concreto: qué estuvo bien y en qué parte específica mejorar.'},
+  {num:2, title:'Queda bonito pero no dice nada', comment:'"La web está bonita, pero revisen algunas cosas."', isUseful:false, why:'Hay una intención de observación, pero sigue siendo inespecífica. El estudiante no sabe qué revisar primero ni por qué eso importa para el criterio.', whatToLook:'Evita adjetivos sin evidencia. "Algunas cosas" no es feedback, es una sugerencia vaga.'},
+  {num:3, title:'Feedback que sí ayuda', comment:'"La web ya comunica bien el negocio y eso es un avance importante. Para el siguiente capítulo, revisen la navegación entre secciones y hagan más visible la propuesta de valor en el inicio, para que el usuario entienda más rápido por qué elegir este emprendimiento."', isUseful:true, why:'Reconoce un logro concreto, señala con precisión qué mejorar y deja una ruta clara para el siguiente capítulo. Así conecta la retro con el proyecto encadenado.', whatToLook:'Noten cómo termina mirando hacia adelante. En CTC siempre hay un próximo capítulo, y el feedback debe dejar ese puente claro.'},
+  {num:4, title:'El feedback que bloquea', comment:'"Todo está mal. Vuelvan a hacerlo."', isUseful:false, why:'Puede bloquear al estudiante. No reconoce nada logrado, no explica qué está mal exactamente y no ofrece orientación concreta de mejora.', whatToLook:'Un feedback sin dirección no es exigencia, es abandono pedagógico. Siempre hay algo que reconocer.'},
+  {num:5, title:'Feedback accionable y conectado', comment:'"Su dashboard ya muestra comparaciones relevantes de la competencia. Para mejorar aún más, conecten dos de esos hallazgos con decisiones concretas de campaña, para que la estrategia no quede solo descriptiva sino sustentada en datos."', isUseful:true, why:'Reconoce un logro real y plantea una mejora específica y viable que da continuidad al proyecto. El estudiante sabe exactamente qué tiene que hacer.', whatToLook:'Observen cómo nombra un logro específico (el dashboard) y propone un paso concreto (conectar hallazgos con decisiones). Eso es feedback accionable.'},
+  {num:6, title:'El comentario que confunde', comment:'"Hay cosas muy buenas y otras que todavía no están listas. En general van por buen camino."', isUseful:false, why:'Tiene intención positiva pero no especifica nada. El estudiante no sabe qué está bien ni qué no está listo. La ambigüedad no orienta.', whatToLook:'Ser positivo no es suficiente si no es específico. ¿Qué cosas están buenas? ¿Qué no está listo? Esas palabras importan.'}
+];
+
+let activeFbCase = 0;
+let fbVoted = false;
+const fbCaseDisplay = document.getElementById('fbCaseDisplay');
+const fbVoteArea = document.getElementById('fbVoteArea');
+const fbEvalResult = document.getElementById('fbEvalResult');
+const fbTryAnother = document.getElementById('fbTryAnother');
+
+function renderFbCase(){
+  fbVoted = false;
+  fbEvalResult.className = 'fb-eval-result';
+  fbEvalResult.innerHTML = '';
+  fbTryAnother.style.display = 'none';
+  const c = feedbackCases[activeFbCase];
+  fbCaseDisplay.innerHTML = `
+    <div class="fb-case-card selected" style="cursor:default;pointer-events:none">
+      <div class="fb-case-header">
+        <span class="fb-case-num">Caso ${c.num} de ${feedbackCases.length}</span>
+        <span style="font-size:12px;color:var(--text3);font-weight:700">${activeFbCase+1}/${feedbackCases.length}</span>
+      </div>
+      <div class="fb-case-title">${c.title}</div>
+      <div class="fb-case-comment selected-comment">${c.comment}</div>
+    </div>
+  `;
+  fbVoteArea.style.display = 'block';
+  fbVoteArea.innerHTML = `
+    <div style="background:#f7f7f7;border-radius:16px;padding:18px 20px;margin-top:-6px;border:1px solid var(--border)">
+      <p style="margin:0 0 14px;font-weight:800;font-size:14px;color:var(--text)">¿Este feedback orienta al estudiante?</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="fb-vote-btn" data-vote="yes" style="flex:1;padding:14px 20px;border-radius:14px;border:2px solid #a8e6c8;background:#e8faf4;color:#0f7a4a;font-weight:900;font-size:15px;cursor:pointer;transition:.18s">✅ Sí, orienta</button>
+        <button class="fb-vote-btn" data-vote="no" style="flex:1;padding:14px 20px;border-radius:14px;border:2px solid #f1b7b1;background:var(--red-l);color:var(--red);font-weight:900;font-size:15px;cursor:pointer;transition:.18s">❌ No orienta</button>
+      </div>
+    </div>
+  `;
+  fbVoteArea.querySelectorAll('.fb-vote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(fbVoted) return;
+      fbVoted = true;
+      const item = feedbackCases[activeFbCase];
+      const votedYes = btn.dataset.vote === 'yes';
+      const isCorrect = votedYes === item.isUseful;
+      // Disable buttons
+      fbVoteArea.querySelectorAll('.fb-vote-btn').forEach(b => {
+        b.style.opacity = b === btn ? '1' : '0.4';
+        b.style.cursor = 'default';
+      });
+      fbEvalResult.className = `fb-eval-result show ${item.isUseful ? 'util' : 'no-util'}`;
+      fbEvalResult.innerHTML = `
+        <h4>${isCorrect ? '✅ Correcto — buena lectura docente' : '🟡 No exactamente — lee el análisis'}</h4>
+        <p><strong>${item.isUseful ? 'Este feedback sí orienta' : 'Este feedback no orienta lo suficiente'}:</strong> ${item.why}</p>
+        <div class="fb-what-to-look">
+          <strong>🔍 Pon ojo en esto</strong>
+          <p>${item.whatToLook}</p>
+        </div>
+      `;
+      fbTryAnother.style.display = activeFbCase < feedbackCases.length - 1 ? 'inline-block' : 'none';
+      fbEvalResult.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+  });
+}
+
+fbTryAnother.addEventListener('click', () => {
+  activeFbCase = (activeFbCase + 1) % feedbackCases.length;
+  renderFbCase();
+  fbCaseDisplay.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+renderFbCase();
+
+/* Feedback tabs */
+const fbTabs = document.querySelectorAll('[data-fbtab]');
+fbTabs.forEach(btn => btn.addEventListener('click', ()=>{
+  fbTabs.forEach(b => b.classList.toggle('active', b===btn));
+  document.getElementById('fb-teoria').classList.toggle('active', btn.dataset.fbtab==='teoria');
+  document.getElementById('fb-practica').classList.toggle('active', btn.dataset.fbtab==='practica');
+}));
+</script>
+</body>
+</html>
